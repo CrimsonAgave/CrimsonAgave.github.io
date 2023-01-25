@@ -27,6 +27,8 @@ function make_meishiki(){
     
         if(isNaN(date.getDate()) || !(1 <= month.value && month.value <= 12) || !(1 <= day.value && day.value <= 31)){
             alert("適切な生年月日を入力してください");
+        }else if(!(1901 <= year.value && year.value <= 2049)){
+            alert(本サイトで命式を作成できるのは1901年から2049年までです)
         }else{
             confirmed = true;
         }
@@ -41,8 +43,8 @@ function make_meishiki(){
         var expires = "";
     }
 
-    var sex = Number(male.checked);
-    var name = username.value;
+    var s = Number(male.checked);
+    var n = username.value;
     var y = year.value;
     var m = month.value;
     var d = day.value;
@@ -50,7 +52,7 @@ function make_meishiki(){
     var mi = minute.value
     var time = y + "_" + m + "_" + d + "_" + h + "_" + mi;
     var shussei = todohuken.value;
-    var params = sex + "_" + name + "_" + time + "_" + shussei;
+    var params = s + "_" + n + "_" + time + "_" + shussei;
     document.cookie = params;
     return confirmed;   
 }
