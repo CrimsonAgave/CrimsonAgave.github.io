@@ -1,0 +1,124 @@
+@charset "utf-8";
+
+body {
+    margin:0;
+    padding:0;
+    position: relative;
+
+}
+
+.head_band {
+    height: 100px;
+    background-color: #dddddd;
+}
+
+.small_title a{
+    color:inherit;
+    text-decoration: none;  
+    font-size: 300%;
+    position:absolute;
+    left: 5%;
+    font-family: '游明朝','Yu Mincho',YuMincho,'Hiragino Mincho Pro',serif;
+    color: #212324;
+    -webkit-text-stroke: 0.2px #FFF;
+    margin-top: 10px;
+}
+
+.img_center {
+    text-align: center;
+}
+
+.board {
+    background-color: #000000;
+
+    background-image:url(wallpaper.jpg);
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: 800px;
+}
+
+.title_image {
+    background-color: #dddddd;
+    background-image:url(yinyang.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 800px;
+    height: 600px;
+    padding: 50px;
+    margin: 0;
+}
+
+.title a{
+    color:inherit;
+    text-decoration: none;  
+    font-size: 500%;
+    position:absolute;
+    left: 50%;
+    margin-left: -200px;
+    font-family: '游明朝','Yu Mincho',YuMincho,'Hiragino Mincho Pro',serif;
+    color: #212324;
+    -webkit-text-stroke: 0.5px #FFF;
+    margin-top: 30px;
+}
+
+.title p{
+    color: #212324;
+}
+
+.select {
+    margin-top: 20%;
+    color:#fac883;
+    text-align: center;
+}
+
+.name {
+    margin-top: 3%;
+    color:#fac883;
+    text-align: center;
+}
+
+
+.birthday {
+    margin: 3%;
+    color:#fac883;
+    text-align: center;
+}
+
+.birthtime {
+    margin-top: 3%;
+    color:#fac883;
+    text-align: center;
+}
+
+.birthplace {
+    margin-top: 3%;
+    color:#fac883;
+    text-align: center;
+}
+
+.button {
+    margin-top: 3%;
+    color:#fac883;
+    text-align: center;
+    padding-bottom: 20%;
+}
+
+input[type=checkbox] {
+    transform: scale(1.5);
+}
+
+footer a{
+    color:azure
+}
+
+
+footer {
+    background-color: #212324;
+    color: azure;
+    text-align: center;
+    font-size: 50%;
+    padding: 10px;
+}
+
+
