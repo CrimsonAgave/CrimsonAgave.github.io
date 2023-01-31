@@ -68,17 +68,15 @@ function is_setsuiri(year, month, day, time, minute){
         let date = new Date(year, month, day, 12, 0);        
     }
 
-    let csv = new XMLHttpRequest();
-    csv.open("GET", "sekki_24_simplified.csv", true);
+    let request = new XMLHttpRequest();
+    request.open("get", "sekki_24_simplified.csv", true);
+    request.send(null);
 
-    let tmp = csv.responseText.split("\n");
-
+    let tmp = request.responseText.split("\n");
+    alert(tmp);
 
     for (let i = 0; i < tmp.length; i++) {
         let line = tmp[i].split(",");
-        alert(line);
-        break;
-
         let setsuiri_date = new Date(line[0], line[1], line[2], line[3], line[4], line[5]);
         if((date.getFullYear() == setsuiri_date.getFullYear()) && (date.getMonth() == setsuiri_date.getMonth())){
             if(date > setsuiri_date){
