@@ -1,10 +1,15 @@
 @charset "utf-8";
 
 body {
-    margin:0;
-    padding:0;
+    margin: 0%;
+    padding: 0%;
     position: relative;
 
+}
+
+.form{
+    margin: 0%;
+    padding: 0%;
 }
 
 .head_band {
@@ -21,7 +26,8 @@ body {
     font-family: '游明朝','Yu Mincho',YuMincho,'Hiragino Mincho Pro',serif;
     color: #212324;
     -webkit-text-stroke: 0.2px #FFF;
-    margin-top: 10px;
+    margin-top: 15px;
+    
 }
 
 .img_center {
@@ -36,6 +42,7 @@ body {
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: 800px;
+    margin: 0;
 }
 
 .title_image {
@@ -89,41 +96,42 @@ body {
 }
 
 .select {
-    margin-top: 20%;
     color:#fac883;
     text-align: center;
+    padding-top: 200px;
+    margin: 0;
 }
 
 .name {
-    margin-top: 3%;
+    margin-top: 20px;
     color:#fac883;
     text-align: center;
 }
 
 
 .birthday {
-    margin: 3%;
+    padding-top: 20px;
     color:#fac883;
     text-align: center;
 }
 
 .birthtime {
-    margin-top: 3%;
+    padding-top: 20px;
     color:#fac883;
     text-align: center;
 }
 
 .birthplace {
-    margin-top: 3%;
+    padding-top: 20px;
     color:#fac883;
     text-align: center;
 }
 
 .button {
-    margin-top: 3%;
+    padding-top: 20px;
     color:#fac883;
     text-align: center;
-    padding-bottom: 20%;
+    padding-bottom: 200px;
 }
 
 input[type=checkbox] {
@@ -144,4 +152,17 @@ footer {
     
 }
 
+.none {
+    height: 100vh;
+}
 
+.pass_button{
+    height: 10vh;
+    width: 20vh;
+}
+
+.button_wrapper{
+    text-align:center;
+    padding-top: 50%;
+ }
+ 
