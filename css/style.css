@@ -27,11 +27,12 @@ body {
     color: #212324;
     -webkit-text-stroke: 0.2px #FFF;
     margin-top: 15px;
-    
+    margin:0;
 }
 
 .img_center {
     text-align: center;
+    margin:0;
 }
 
 .board {
@@ -66,11 +67,13 @@ body {
     font-family: '游明朝','Yu Mincho',YuMincho,'Hiragino Mincho Pro',serif;
     color: #212324;
     -webkit-text-stroke: 0.5px #FFF;
+    margin:0;
     margin-top: 30px;
 }
 
 .title p{
     color: #212324;
+    margin:0;
 }
 
 .username p{
@@ -79,6 +82,7 @@ body {
     padding-bottom: 3%;
     color: #fac883;
     font-size: 200%;
+    margin:0;
 }
 
 .birth p{
@@ -132,10 +136,13 @@ body {
     color:#fac883;
     text-align: center;
     padding-bottom: 200px;
+    margin:0;
 }
 
 input[type=checkbox] {
     transform: scale(1.5);
+    margin:0;
+
 }
 
 footer a{

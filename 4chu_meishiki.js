@@ -60,7 +60,7 @@ function readCookie(){
 
     let birth_text = "生年月日時：　";
     let element_birthday = document.getElementById("birthday");
-    birth_text += year + " 年 " + month + " 月 " + day + "日　";
+    birth_text += year + " 年 " + month + " 月 " + day + " 日　";
 
     let element_birthtime = document.getElementById("birthtime");
     if(time == "" || minute == ""){
@@ -172,9 +172,9 @@ function make_getsukanshi(birth_date, data_setsuiri, nenkanshi_idx){
                 shi_idx = (shi_idx + 1) % 12;
             }
 
-            let setsuiri_text = "節入り：" + SETSUIRI_LIST[setsuiri_date.getMonth()] + "　" + setsuiri_date.getFullYear() + " 年 " 
-                            + String(setsuiri_date.getMonth() + 1) + "月 " + setsuiri_date.getDate() + "日　" 
-                            + "時刻：" + setsuiri_date.getHours() + "時 " + setsuiri_date.getMinutes() + "分 ";
+            let setsuiri_text = "節入り：" + SETSUIRI_LIST[setsuiri_date.getMonth()] + "　" + setsuiri_date.getFullYear() + "年 " 
+                            + String(setsuiri_date.getMonth() + 1) + " 月 " + setsuiri_date.getDate() + " 日　" 
+                            + "時刻：" + setsuiri_date.getHours() + " 時 " + setsuiri_date.getMinutes() + " 分 ";
             let element_setsuiri = document.getElementById("setsuiri");
             element_setsuiri.innerHTML = setsuiri_text;
         
