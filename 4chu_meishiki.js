@@ -24,7 +24,6 @@ for(i = 0; i < 5; i++){
         JI_KANSHI[i].push([(2 * i + j) % 10, j % 12]);
     }
 }
-console.log(JI_KANSHI);
 var TSUHENSEI = ["比肩", "劫財", "食神", "傷官", "正財", "偏財", "正官", "偏官", "正印", "偏印"];
 
 
@@ -59,21 +58,19 @@ function readCookie(){
     }
 
     let birth_text = "生年月日時：　";
-    let element_birthday = document.getElementById("birthday");
     birth_text += year + " 年 " + month + " 月 " + day + " 日　";
-
     let element_birthtime = document.getElementById("birthtime");
     if(time == "" || minute == ""){
         birth_text += "時刻：不明";
-        time = 0;
-        minute = 0; 
+        time = -1;
+        minute = -1; 
     }else{
         birth_text += "時刻：" + time + " 時 " + minute + " 分";
     }
 
     element_birthtime.innerHTML = birth_text;
 
-    meishiki = kanshi(year, month, day, time, minute);
+    meishiki = kanshi(year, month, day, time, minute, birthplace);
 }
 
 
@@ -89,7 +86,7 @@ function convertCSVtoArray(csv){
     return result;
 }
 
-function kanshi(year, month, day, time, minute){
+function kanshi(year, month, day, time, minute, prefecture){
     let result = -1;
     let date = new Date(year, month, day, time, minute);
     if(time == -1 || minute == -1){
@@ -122,16 +119,21 @@ function kanshi(year, month, day, time, minute){
         let gekkan = KAN.slice(getsukanshi_idx[0])[0];
         let getshi = SHI.slice(getsukanshi_idx[1])[0];  
     
-        let nikkanshi_idx = make_nikkanshi(birth_date, data);
+        let nikkanshi_idx = make_nikkanshi(birth_date, prefecture);
         let nikkan = KAN.slice(nikkanshi_idx[0])[0];
         let nitshi = SHI.slice(nikkanshi_idx[1])[0]; 
 
-        let jikanshi_idx = make_jikanshi(birth_date, data, nikkanshi_idx);
-        let jikan = KAN.slice(jikanshi_idx[0])[0];
-        let jishi = SHI.slice(jikanshi_idx[1])[0]; 
+        let jikanshi_idx = make_jikanshi(birth_date, nikkanshi_idx, prefecture);
+        let jikan = "不明";
+        let jishi = "不明";
+        if(time != -1 && minute != -1){
+            jikan = KAN.slice(jikanshi_idx[0])[0];
+            jishi = SHI.slice(jikanshi_idx[1])[0];     
+        }
 
-        meishiki = [[nenkan, nenshi], [gekkan, getshi], [nikkan, nitshi], [jikan, jishi]];
-        alert(meishiki);
+        meishiki = [[jikan, jishi], [nikkan, nitshi], [gekkan, getshi], [nenkan, nenshi]];
+        console.log(meishiki);
+        display_meishiki(meishiki);
     }
 }
 
@@ -189,25 +191,118 @@ function make_getsukanshi(birth_date, data_setsuiri, nenkanshi_idx){
     return getsukanshi_idx;
 }
 
-function make_nikkanshi(birth_date, data_setsuiri){
+function make_nikkanshi(birth_date, prefecture){
     criterion = new Date(1850, 1, 1, 0, 0);           // 丙寅: 2
     nissu = (birth_date - criterion) / 86400000;
-    nikkanshi_idx = Math.floor((nissu　+ 20) % 60) - 1;
+    nikkanshi_idx = Math.floor((nissu + 20) % 60) - 1;
 
-    // 時間と緯軽度の関係は未実装
+    // 時差
+    let Prefecture_idx = Prefectures_name.indexOf(prefecture);
+    longitude = Prefectures_x[Prefecture_idx];
+    jisa_minutes = Math.round((longitude - 135) * 4);
+    let time = 0;
+    if(birth_date.getMinutes() + jisa_minutes >= 60){
+        time = (birth_date.getHours() + 1 + 1);
+        if(time >= 24){ 
+            nikkanshi_idx = Math.floor((nissu + 1 + 20) % 60) - 1;
+        }
+    }else if(birth_date.getMinutes() + jisa_minutes < 0){
+        time = (birth_date.getHours() + 1 - 1);
+        if(time <= 0){ 
+            nikkanshi_idx = Math.floor((nissu - 1 + 20) % 60) - 1;
+        }
+    }
 
     kan_idx = nikkanshi_idx % 10;
     shi_idx = nikkanshi_idx % 12;
     return [kan_idx, shi_idx];
 }
 
-function make_jikanshi(birth_date, data_setsuiri, nikkannshi_idx){
+function make_jikanshi(birth_date, nikkannshi_idx, prefecture){
+    // 時差
+    let Prefecture_idx = Prefectures_name.indexOf(prefecture);
+    longitude = Prefectures_x[Prefecture_idx];
+    jisa_minutes = Math.round((longitude - 135) * 4);
+    let time = 0;
+    if(birth_date.getMinutes() + jisa_minutes >= 60){
+        time = (birth_date.getHours() + 1 + 1);
+        if(time >= 24){ time %= 24; }
+    }else if(birth_date.getMinutes() + jisa_minutes < 0){
+        time = (birth_date.getHours() + 1 - 1);
+        if(time <= 0){ time = time + 24; }
+    }else{
+        time = (birth_date.getHours() + 1);
+    }
+    let shi_idx = Math.floor(time / 2);    
+    
     let kan_idx = nikkannshi_idx[0] % 5;
-    let shi_idx = Math.floor((birth_date.getHours() + 1) / 2);
 
-    // 時間と緯軽度の関係は未実装
-    // 
+
+    // 表示
+    let element_birthplace = document.getElementById("birth_prefecture");
+    if(prefecture == "不明"){
+        birthplace_text = "出生地：不明"
+        prefecture = "兵庫県";
+    }else{
+        birthplace_text = "出生地：" + prefecture;
+    }    
+    element_birthplace.innerHTML = birthplace_text + "（時差 " + jisa_minutes + "分）";
 
     let jikanshi_idx = JI_KANSHI[kan_idx][shi_idx];
     return jikanshi_idx;
+}
+
+
+var Prefectures_name = ["北海道","青森県","岩手県","宮城県","秋田県",
+                        "山形県","福島県","茨城県","栃木県","群馬県",
+                        "埼玉県","千葉県","東京都","神奈川県","新潟県",
+                        "富山県","石川県","福井県","山梨県","長野県",
+                        "岐阜県","静岡県","愛知県","三重県","滋賀県",
+                        "京都府","大阪府","兵庫県","奈良県","和歌山県",
+                        "鳥取県","島根県","岡山県","広島県","山口県",
+                        "徳島県","香川県","愛媛県","高知県","福岡県",
+                        "佐賀県","長崎県","熊本県","大分県","宮崎県","鹿児島県","沖縄県"];
+
+var Prefectures_x = [141.347899,140.740593,141.152667,140.872103,140.102334,
+                    140.363634,140.467521,140.446793,139.883565,139.060156,
+                    139.648933,140.123308,139.691704,139.642514,139.023221,
+                    137.211338,136.625573,136.221642,138.568449,138.181224,
+                    136.722291,138.383054,136.906565,136.508591,135.86859,
+                    135.755608,135.519711,135.183025,135.832744,135.167506,
+                    134.237672,133.050499,133.934675,132.459622,131.4705,
+                    134.559303,134.043444,132.765362,133.53108,130.418314,
+                    130.298822,129.873756,130.741667,131.612591,131.423855,130.557981,127.680932];
+
+function display_meishiki(meishiki){
+    if(KAN.includes(meishiki[0][0])){
+        document.getElementById("jikan").src = "css/" + meishiki[0][0] + ".png";
+    }else{
+        document.getElementById("jikan").src = "css/" + "不明" + ".png";
+    }
+    if(SHI.includes(meishiki[0][1])){
+        document.getElementById("jishi").src = "css/" + meishiki[0][1] + ".png";
+    }else{
+        document.getElementById("jishi").src = "css/" + "不明" + ".png";
+    }
+
+    if(KAN.includes(meishiki[1][0])){
+        document.getElementById("nikkan").src = "css/" + meishiki[1][0] + ".png";
+    }
+    if(SHI.includes(meishiki[1][1])){
+        document.getElementById("nisshi").src = "css/" + meishiki[1][1] + ".png";
+    }
+    if(KAN.includes(meishiki[2][0])){
+        document.getElementById("gekkan").src = "css/" + meishiki[2][0] + ".png";
+    }
+    if(SHI.includes(meishiki[2][1])){
+        document.getElementById("gesshi").src = "css/" + meishiki[2][1] + ".png";
+    }
+    if(KAN.includes(meishiki[3][0])){
+        document.getElementById("nenkan").src = "css/" + meishiki[3][0] + ".png";
+    }
+    if(SHI.includes(meishiki[3][1])){
+        document.getElementById("nenshi").src = "css/" + meishiki[3][1] + ".png";
+    }
+
+
 }
