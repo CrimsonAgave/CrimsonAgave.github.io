@@ -261,6 +261,7 @@ function make_jikanshi(birth_date, nikkannshi_idx, prefecture){
     if(prefecture == "不明"){
         birthplace_text = "出生地：不明"
         prefecture = "兵庫県";
+        jisa_minutes = 0;
     }else{
         birthplace_text = "出生地：" + prefecture;
     }    
@@ -328,9 +329,6 @@ function make_tsuhensei(meishiki){
     let getshi = culc_matrix([2, 1], nikkan);
     let nenkan = culc_matrix([3, 0], nikkan);
     let nenshi = culc_matrix([3, 1], nikkan);
-
-    let tsuhensei_meishiki = [jikan, jishi, "自分", nisshi, gekkan, getshi, nenkan, nenshi];
-    console.log(tsuhensei_meishiki);
 
     let jikan_tsuhensei = document.getElementById("jikan_tsuhensei");
     jikan_tsuhensei.innerHTML = jikan;
