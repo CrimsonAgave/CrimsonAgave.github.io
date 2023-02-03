@@ -137,12 +137,17 @@ body {
     text-align: center;
 }
 
-.button {
+.meishiki_button_wrapper {
     padding-top: 20px;
     color:#fac883;
     text-align: center;
     padding-bottom: 200px;
     margin:0;
+}
+
+.meishiki_button{
+    height: 5vh;
+    width: 10vh;
 }
 
 input[type=checkbox] {
@@ -157,6 +162,7 @@ input[type=checkbox] {
     border-collapse:collapse;
     border-spacing: 0;
 }
+
 
 .meishiki td{
     border-collapse:collapse;

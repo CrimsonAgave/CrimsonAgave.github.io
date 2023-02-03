@@ -132,7 +132,6 @@ function kanshi(year, month, day, time, minute, prefecture){
         }
 
         meishiki = [[jikan, jishi], [nikkan, nitshi], [gekkan, getshi], [nenkan, nenshi]];
-        console.log(meishiki);
         display_meishiki(meishiki);
     }
 }
