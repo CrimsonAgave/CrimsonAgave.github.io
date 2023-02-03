@@ -59,7 +59,7 @@ function readCookie(){
     let element_birthtime = document.getElementById("birthtime");
     if(time == "" || minute == ""){
         birth_text += "時刻：不明";
-        time = -1;
+        time = 12;
         minute = -1; 
     }else{
         birth_text += "時刻：" + time + " 時 " + minute + " 分";
