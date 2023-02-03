@@ -77,7 +77,6 @@ body {
 .username p{
     text-align: center;
     padding-top: 30px;
-    padding-bottom: 10px;
     color: #fac883;
     font-size: 200%;
     margin:0;
@@ -112,6 +111,13 @@ body {
     margin: 0;
 }
 
+.inputs{
+    color:#fac883;
+    margin-left: auto;
+    margin-right: auto;
+    margin:auto
+}
+
 .name {
     margin-top: 20px;
     color:#fac883;
@@ -142,6 +148,13 @@ body {
     margin: 0;
 }
 
+.inputs td{
+    border-collapse:collapse;
+    border-spacing: 0;
+    margin: 0;
+    padding: 10px;
+}
+
 .meishiki_button_wrapper {
     padding-top: 20px;
     color:#fac883;
@@ -168,6 +181,9 @@ input[type=checkbox] {
     border-spacing: 0;
 }
 
+input {
+    width: 50px;
+}
 
 .meishiki td{
     border-collapse:collapse;
