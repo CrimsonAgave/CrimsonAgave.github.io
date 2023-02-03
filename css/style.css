@@ -101,7 +101,7 @@ body {
     text-align: center;
     color: #fac883;
     margin: 0;
-    padding-bottom: 100px;
+    padding-bottom: 80px;
 }
 
 .select {
@@ -208,10 +208,14 @@ input {
 
 }
 
+.meishiki td{
+    color:#fac883;
+    text-align: center;
+}
+
 footer a{
     color:azure
 }
-
 
 footer {
     background-color: #212324;

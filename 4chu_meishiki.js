@@ -24,9 +24,6 @@ for(i = 0; i < 5; i++){
         JI_KANSHI[i].push([(2 * i + j) % 10, j % 12]);
     }
 }
-var TSUHENSEI = ["比肩", "劫財", "食神", "傷官", "正財", "偏財", "正官", "偏官", "正印", "偏印"];
-
-
 
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -133,6 +130,7 @@ function kanshi(year, month, day, time, minute, prefecture){
 
         meishiki = [[jikan, jishi], [nikkan, nitshi], [gekkan, getshi], [nenkan, nenshi]];
         display_meishiki(meishiki);
+        make_tsuhensei(meishiki);
     }
 }
 
@@ -189,6 +187,27 @@ function make_getsukanshi(birth_date, data_setsuiri, nenkanshi_idx){
     let getsukanshi_idx = GETSU_KANSHI[kan_idx][shi_idx];
     return getsukanshi_idx;
 }
+
+var Prefectures_name = ["北海道","青森県","岩手県","宮城県","秋田県",
+                        "山形県","福島県","茨城県","栃木県","群馬県",
+                        "埼玉県","千葉県","東京都","神奈川県","新潟県",
+                        "富山県","石川県","福井県","山梨県","長野県",
+                        "岐阜県","静岡県","愛知県","三重県","滋賀県",
+                        "京都府","大阪府","兵庫県","奈良県","和歌山県",
+                        "鳥取県","島根県","岡山県","広島県","山口県",
+                        "徳島県","香川県","愛媛県","高知県","福岡県",
+                        "佐賀県","長崎県","熊本県","大分県","宮崎県","鹿児島県","沖縄県"];
+
+var Prefectures_x = [141.347899,140.740593,141.152667,140.872103,140.102334,
+                    140.363634,140.467521,140.446793,139.883565,139.060156,
+                    139.648933,140.123308,139.691704,139.642514,139.023221,
+                    137.211338,136.625573,136.221642,138.568449,138.181224,
+                    136.722291,138.383054,136.906565,136.508591,135.86859,
+                    135.755608,135.519711,135.183025,135.832744,135.167506,
+                    134.237672,133.050499,133.934675,132.459622,131.4705,
+                    134.559303,134.043444,132.765362,133.53108,130.418314,
+                    130.298822,129.873756,130.741667,131.612591,131.423855,130.557981,127.680932];
+
 
 function make_nikkanshi(birth_date, prefecture){
     criterion = new Date(1850, 1, 1, 0, 0);           // 丙寅: 2
@@ -251,27 +270,6 @@ function make_jikanshi(birth_date, nikkannshi_idx, prefecture){
     return jikanshi_idx;
 }
 
-
-var Prefectures_name = ["北海道","青森県","岩手県","宮城県","秋田県",
-                        "山形県","福島県","茨城県","栃木県","群馬県",
-                        "埼玉県","千葉県","東京都","神奈川県","新潟県",
-                        "富山県","石川県","福井県","山梨県","長野県",
-                        "岐阜県","静岡県","愛知県","三重県","滋賀県",
-                        "京都府","大阪府","兵庫県","奈良県","和歌山県",
-                        "鳥取県","島根県","岡山県","広島県","山口県",
-                        "徳島県","香川県","愛媛県","高知県","福岡県",
-                        "佐賀県","長崎県","熊本県","大分県","宮崎県","鹿児島県","沖縄県"];
-
-var Prefectures_x = [141.347899,140.740593,141.152667,140.872103,140.102334,
-                    140.363634,140.467521,140.446793,139.883565,139.060156,
-                    139.648933,140.123308,139.691704,139.642514,139.023221,
-                    137.211338,136.625573,136.221642,138.568449,138.181224,
-                    136.722291,138.383054,136.906565,136.508591,135.86859,
-                    135.755608,135.519711,135.183025,135.832744,135.167506,
-                    134.237672,133.050499,133.934675,132.459622,131.4705,
-                    134.559303,134.043444,132.765362,133.53108,130.418314,
-                    130.298822,129.873756,130.741667,131.612591,131.423855,130.557981,127.680932];
-
 function display_meishiki(meishiki){
     if(KAN.includes(meishiki[0][0])){
         document.getElementById("jikan").src = "css/" + meishiki[0][0] + ".png";
@@ -302,6 +300,72 @@ function display_meishiki(meishiki){
     if(SHI.includes(meishiki[3][1])){
         document.getElementById("nenshi").src = "css/" + meishiki[3][1] + ".png";
     }
+}
 
+var TSUHENSEI_MATRIX   = [  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+                            [1, 0, 3, 2, 5, 4, 7, 6, 9, 8],
+                            [8, 9, 0, 1, 2, 3, 4, 5, 6, 7],
+                            [9, 8, 1, 0, 3, 2, 5, 4, 7, 6],
+                            [6, 7, 8, 9, 0, 1, 2, 3, 4, 5],
+                            [7, 6, 9, 8, 1, 0, 3, 2, 5, 4],
+                            [4, 5, 6, 7, 8, 9, 0, 1, 2, 3],
+                            [5, 4, 7, 6, 9, 8, 1, 0, 3, 2]
+                            [2, 3, 4, 5, 6, 7, 8, 9, 0, 1]
+                            [3, 2, 5, 4, 7, 6, 9, 8, 1, 0]];
+var SAME_YINYANG_SHItoKAN = [8, 5, 0, 1, 4, 3, 2, 5, 6, 7, 4, 9];
+var TSUHENSEI = ["比肩", "劫財", "食神", "傷官", "偏財", "正財", "偏官", "正官", "偏印", "正印" ];
+
+function make_tsuhensei(meishiki){
+    let nikkan = KAN.indexOf(meishiki[1][0]);
+    let nitshi = culc_matrix([1, 1], nikkan);
+    let jikan = "";
+    let jishi = "";
+    if(KAN.includes(meishiki[0][0])){ jikan = culc_matrix([0, 0], nikkan); }
+    else{jikan = "不明";}
+    if(SHI.includes(meishiki[0][1])){ jishi = culc_matrix([0, 1], nikkan); }
+    else{jishi = "不明";}
+    let gekkan = culc_matrix([2, 0], nikkan);
+    let getshi = culc_matrix([2, 1], nikkan);
+    let nenkan = culc_matrix([3, 0], nikkan);
+    let nenshi = culc_matrix([3, 1], nikkan);
+
+    let tsuhensei_meishiki = [jikan, jishi, "自分", nisshi, gekkan, getshi, nenkan, nenshi];
+    console.log(tsuhensei_meishiki);
+
+    let jikan_tsuhensei = document.getElementById("jikan_tsuhensei");
+    jikan_tsuhensei.innerHTML = jikan;
+    let jishi_tsuhensei = document.getElementById("jishi_tsuhensei");
+    jishi_tsuhensei.innerHTML = jishi;
+    let nikkan_tsuhensei = document.getElementById("nikkan_tsuhensei");
+    nikkan_tsuhensei.innerHTML = "　　";
+    let nitshi_tsuhensei = document.getElementById("nitshi_tsuhensei");
+    nitshi_tsuhensei.innerHTML = nitshi;
+    let gekkan_tsuhensei = document.getElementById("gekkan_tsuhensei");
+    gekkan_tsuhensei.innerHTML = gekkan;
+    let getshi_tsuhensei = document.getElementById("getshi_tsuhensei");
+    getshi_tsuhensei.innerHTML = gekkan;
+    let nenkan_tsuhensei = document.getElementById("nenkan_tsuhensei");
+    nenkan_tsuhensei.innerHTML = nenkan;
+    let nenshi_tsuhensei = document.getElementById("nenshi_tsuhensei");
+    nenshi_tsuhensei.innerHTML = nenshi;
+}
+
+function culc_matrix(idx, nikkan){
+    let result = ""
+    if(idx[1] == 0){
+        result = TSUHENSEI[TSUHENSEI_MATRIX[nikkan][KAN.indexOf(meishiki[idx[0]][idx[1]])]];
+    }else if(idx[1] == 1){
+        result = TSUHENSEI[TSUHENSEI_MATRIX[nikkan][  SAME_YINYANG_SHItoKAN[  SHI.indexOf(  meishiki[idx[0]][idx[1]]  )  ]  ]];
+    }else{
+        alert("エラー：通編成計算")
+    }
+    return result;
+}
+
+function culc_gogyo(meishiki){
+
+}
+
+function make_zokan(meishiki){
 
 }
