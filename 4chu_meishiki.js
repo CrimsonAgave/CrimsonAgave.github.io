@@ -24,10 +24,15 @@ const SETSUIRI_LIST = ["小寒", "立春", "啓蟄", "清明", "立夏", "芒種
 var JI_KANSHI = [];
 for(i = 0; i < 5; i++){
     JI_KANSHI.push([])
-    for(j = 0; j < 13; j++){
+    for(j = 0; j < 13   ; j++){
         JI_KANSHI[i].push([(2 * i + j) % 10, j % 12]);
     }
 }
+for(let i = 0; i < 5; i++){
+    JI_KANSHI[i][12] = JI_KANSHI[i][0];
+}
+
+console.log(JI_KANSHI[0])
 const GOGYO_COLOR = ["#A4D2Bf", "#D79CA7", "#D6D29E", "#B8B8B8", "#909090"] 
 
 
@@ -228,9 +233,9 @@ var Prefectures_x = [141.347899,140.740593,141.152667,140.872103,140.102334,
 
 
 function make_nikkanshi(birth_date, prefecture){
-    criterion = new Date(1850, 1, 1, 0, 0);           // 丙寅: 2
-    nissu = (birth_date - criterion) / 86400000;
-    nikkanshi_idx = Math.floor((nissu + 20) % 60) - 1;
+    const criterion = new Date(1850, 1, 1, 0, 0);           // 丙寅: 2
+    let nissu = (birth_date - criterion) / 86400000;
+    let nikkanshi_idx = Math.floor((nissu + 20) % 60) - 1;
 
     // 時差
     let Prefecture_idx = Prefectures_name.indexOf(prefecture);
@@ -239,7 +244,7 @@ function make_nikkanshi(birth_date, prefecture){
     let time = 0;
     if(birth_date.getMinutes() + jisa_minutes >= 60){
         time = (birth_date.getHours() + 1 + 1);
-        if(time >= 24){ 
+        if(time > 24){ 
             nikkanshi_idx = Math.floor((nissu + 1 + 20) % 60) - 1;
         }
     }else if(birth_date.getMinutes() + jisa_minutes < 0){
@@ -247,6 +252,9 @@ function make_nikkanshi(birth_date, prefecture){
         if(time <= 0){ 
             nikkanshi_idx = Math.floor((nissu - 1 + 20) % 60) - 1;
         }
+    }
+    if(nikkanshi_idx < 0){
+        nikkanshi_idx = 59;
     }
 
     kan_idx = nikkanshi_idx % 10;
@@ -446,6 +454,7 @@ function make_daiun(meishiki, sex, birth_date, setsuiri_data){
     let daiun_nen_hyoji = []
     let daiun_kan = [];
     let daiun_shi = [];
+    let today = new Date();
     for(j = 0; j < 3; j++){
         for(i = 0; i < daiun.length ; i++){
             daiun_row.push(document.createElement("tr"));
@@ -457,6 +466,16 @@ function make_daiun(meishiki, sex, birth_date, setsuiri_data){
                 daiun_nen_hyoji[i].style.color = "#fac883";
                 daiun_nen_hyoji[i].style.fontSize = "60%";
                 daiun_nen_hyoji[i].style.fontFamily  = "Century";
+                let nenrei = today.getFullYear() - birth_date.getFullYear() 
+                try {
+                    if(daiun_nen[i] <= nenrei && nenrei < daiun_nen[i + 1] ){
+                        daiun_nen_hyoji[i].style.backgroundColor = "#fac883";
+                        daiun_nen_hyoji[i].style.color = "#212324";
+                    }    
+                } catch (error) {
+                   console.log(error); 
+                }
+                
             }else if(j == 1){
                 daiun_kan.push(document.createElement("td"));
                 daiun_kan[i].textContent = daiun[i][0];
@@ -478,7 +497,7 @@ function make_daiun(meishiki, sex, birth_date, setsuiri_data){
 }
 
 function make_ryuun(birth_date){
-    // 計算
+    // 年運計算
     const len = 124;
     const kijun_date = 2023;
     const kanshi = "癸卯";
@@ -488,9 +507,11 @@ function make_ryuun(birth_date){
     let nenun = [];
     let nenun_nen = [];
     let toshi = [];         // 年齢。数え年ではない
-    let y = Number(birth_date.getFullYear());
     for(i = 0; i <= len; i++){
         let j = (ROKUJU_KANSHI_str.indexOf(kanshi) + gap + i) % 60;
+        if(j < 0){
+            j += 60;
+        }
         nenun.push(ROKUJU_KANSHI_str[j]);
         nenun_nen.push(birth_date.getFullYear() + i);
         toshi.push(i);
@@ -517,16 +538,22 @@ function make_ryuun(birth_date){
                 nenun_nen_hyoji[i].style.color = "#fac883";
                 nenun_nen_hyoji[i].style.fontSize = "60%";
                 nenun_nen_hyoji[i].style.fontFamily  = "Century";
+                if(toshi[i] + birth_date.getFullYear() == today.getFullYear()){
+                    nenun_nen_hyoji[i].style.backgroundColor = "#fac883";
+                    nenun_nen_hyoji[i].style.color = "#212324";
+                }
             }else if(j == 1){
                 nenun_kan.push(document.createElement("td"));
                 nenun_kan[i].textContent = nenun[i][0];
                 nenun_row[j].appendChild(nenun_kan[i]);
                 let c = Math.floor(KAN.indexOf(nenun[i][0]) / 2);
+
                 nenun_kan[i].style.backgroundColor  = GOGYO_COLOR[c];
             }else if(j == 2){
                 nenun_shi.push(document.createElement("td"));
                 nenun_shi[i].textContent = nenun[i][1];   
                 nenun_row[j].appendChild(nenun_shi[i]);   
+
                 let gogyo_shi = [4, 2, 0, 0, 2, 1, 1, 2, 3, 3, 2, 4];
                 let c = gogyo_shi[SHI.indexOf(nenun[i][1])]
                 nenun_shi[i].style.backgroundColor  = GOGYO_COLOR[c]; 
@@ -538,9 +565,65 @@ function make_ryuun(birth_date){
                 nen_hyoji[i].style.fontSize = "60%";
                 nen_hyoji[i].style.fontFamily = "Century";
                 if(toshi[i] + birth_date.getFullYear() == today.getFullYear()){
-                    nen_hyoji[i].id = "now";
+                    nen_hyoji[i].style.backgroundColor = "#fac883";
+                    nen_hyoji[i].style.color = "#212324";
                 }
             }        
+        }
+    }
+
+    // 月運計算
+    const getsu_len = 36;
+    const kijun_year = 2023;
+    const kijun_getsu = 1;
+
+    let gap_g = today.getFullYear() * 12 + today.getMonth() - kijun_year * 12 + kijun_getsu;
+    let getsuun = [];
+    let getsuun_getsu = [];
+    for(i = 0; i < getsu_len; i++){
+        let j = (ROKUJU_KANSHI_str.indexOf(kanshi) + gap_g + i - 12 + 8) % 60;
+        getsuun.push(ROKUJU_KANSHI_str[j]);
+        getsuun_getsu.push(i % 12 + 1);
+    }
+
+    // 月運 表示
+    let getsuun_body = document.getElementsByClassName("getsuun_body")[0];
+    let getsuun_table = document.createElement("table");
+    getsuun_body.appendChild(getsuun_table);
+
+    let getsuun_row = [];
+    let getsuun_getsu_hyoji = []
+    let getsuun_kan = [];
+    let getsuun_shi = [];
+    for(j = 0; j < 4; j++){
+        for(i = 0; i < getsuun.length ; i++){
+            getsuun_row.push(document.createElement("tr"));
+            getsuun_table.appendChild(getsuun_row[j]);
+            if(j == 0){
+                getsuun_getsu_hyoji.push(document.createElement("td"));
+                getsuun_getsu_hyoji[i].textContent = getsuun_getsu[i];
+                getsuun_row[j].appendChild(getsuun_getsu_hyoji[i]);
+                getsuun_getsu_hyoji[i].style.color = "#fac883";
+                getsuun_getsu_hyoji[i].style.fontSize = "60%";
+                getsuun_getsu_hyoji[i].style.fontFamily  = "Century";
+                if((Math.floor(i / 12) == 1) && (today.getMonth() + 1 == getsuun_getsu[i])){
+                    getsuun_getsu_hyoji[i].style.backgroundColor = "#fac883";
+                    getsuun_getsu_hyoji[i].style.color = "#212324";
+                }
+            }else if(j == 1){
+                getsuun_kan.push(document.createElement("td"));
+                getsuun_kan[i].textContent = getsuun[i][0];
+                getsuun_row[j].appendChild(getsuun_kan[i]);
+                let c = Math.floor(KAN.indexOf(getsuun[i][0]) / 2);
+                getsuun_kan[i].style.backgroundColor  = GOGYO_COLOR[c];
+            }else if(j == 2){
+                getsuun_shi.push(document.createElement("td"));
+                getsuun_shi[i].textContent = getsuun[i][1];   
+                getsuun_row[j].appendChild(getsuun_shi[i]);   
+                let gogyo_shi = [4, 2, 0, 0, 2, 1, 1, 2, 3, 3, 2, 4];
+                let c = gogyo_shi[SHI.indexOf(getsuun[i][1])]
+                getsuun_shi[i].style.backgroundColor  = GOGYO_COLOR[c]; 
+            }
         }
     }
 }

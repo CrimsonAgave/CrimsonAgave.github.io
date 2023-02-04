@@ -76,7 +76,7 @@ body {
 
 .username p{
     text-align: center;
-    padding-top: 10px;
+    padding-top: 40px;
     color: #fac883;
     font-size: 130%;
     margin:0;
@@ -103,7 +103,7 @@ body {
     text-align: center;
     color: #fac883;
     margin: 0;
-    padding-bottom: 60px;
+    padding-bottom: 120px;
 }
 
 .select {
@@ -215,7 +215,7 @@ input {
 }
 
 .daiun_board{
-    padding-top: 60px;
+    padding-top: 120px;
     text-align: center;
     color: #fac883;
 }
@@ -246,7 +246,7 @@ input {
 }
 
 .nenun_board{
-    padding-top:20px;
+    padding-top:10px;
     text-align: center;
     color: #fac883;
 }
@@ -268,6 +268,40 @@ input {
 } 
 
 .nenun_body td{
+    border-color: #fac883;
+    color: #212324;
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+
+.getsuun_board{
+    padding-top:10px;
+    text-align: center;
+    color: #fac883;
+    padding-bottom: 100px;
+}
+
+
+.getsuun_body{
+    margin-top: 0;
+    padding-top: 0;
+    overflow-x: auto;
+    background-color: #212324;
+    direction: rtl;    
+}
+
+.getsuun_body table{
+    font-size: 130%;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: serif;
+} 
+
+.getsuun_body td{
+    text-align: center;
     border-color: #fac883;
     color: #212324;
     padding-left: 3px;
