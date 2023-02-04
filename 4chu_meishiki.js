@@ -29,7 +29,6 @@ for(i = 0; i < 5; i++){
     }
 }
 
-
 document.addEventListener('DOMContentLoaded', function() {
     readCookie();
 });
@@ -58,20 +57,22 @@ function readCookie(){
         element_name.innerHTML = username;
     }
 
-    let birth_text = "生年月日時：　";
+    let birth_text = "生年月日：　";
     birth_text += year + " 年 " + month + " 月 " + day + " 日　";
     let element_birthtime = document.getElementById("birthtime");
     if(time == "" || minute == ""){
         birth_text += "時刻：不明";
         time = 12;
         minute = -1; 
+        have_jikanshi = false;
     }else{
         birth_text += "時刻：" + time + " 時 " + minute + " 分";
+        have_jikanshi = true;    
     }
 
     element_birthtime.innerHTML = birth_text;
 
-    meishiki = kanshi(year, month, day, time, minute, birthplace);
+    meishiki = kanshi(year, month, day, time, minute, birthplace, have_jikanshi);
 }
 
 
@@ -87,7 +88,7 @@ function convertCSVtoArray(csv){
     return result;
 }
 
-function kanshi(year, month, day, time, minute, prefecture){
+function kanshi(year, month, day, time, minute, prefecture, have_jikanshi){
     let result = -1;
     let date = new Date(year, month, day, time, minute);
     if(time == -1 || minute == -1){
@@ -124,18 +125,27 @@ function kanshi(year, month, day, time, minute, prefecture){
         let nikkan = KAN.slice(nikkanshi_idx[0])[0];
         let nitshi = SHI.slice(nikkanshi_idx[1])[0]; 
 
-        let jikanshi_idx = make_jikanshi(birth_date, nikkanshi_idx, prefecture);
         let jikan = "不明";
         let jishi = "不明";
-        if(time != -1 && minute != -1){
+        if(have_jikanshi == true){
+            let jikanshi_idx = make_jikanshi(birth_date, nikkanshi_idx, prefecture);
             jikan = KAN.slice(jikanshi_idx[0])[0];
             jishi = SHI.slice(jikanshi_idx[1])[0];     
+        }else{
+            let element_birthplace = document.getElementById("birth_prefecture");
+            if(prefecture == "不明"){
+                birthplace_text = "出生地：不明"
+                prefecture = "兵庫県";
+            }else{
+                birthplace_text = "出生地：" + prefecture;
+            }
+            element_birthplace.innerHTML = birthplace_text;
         }
 
         meishiki = [[jikan, jishi], [nikkan, nitshi], [gekkan, getshi], [nenkan, nenshi]];
         display_meishiki(meishiki);
         make_tsuhensei(meishiki);
-        make_daiun(meishiki, sex)
+        make_daiun(meishiki, sex, data)
     }
 }
 
@@ -365,7 +375,7 @@ function culc_matrix(idx, nikkan){
     return result;
 }
 
-function make_daiun(meishiki, sex){
+function make_daiun(meishiki, sex, setsuiri_data){
     let jun_un = 0;
     let nenkan_yang = ((KAN.indexOf(meishiki[3][0]) + 1) % 2)
 
@@ -378,7 +388,7 @@ function make_daiun(meishiki, sex){
         }
     }else{
         if(nenkan_yang == 1){
-            jun_un = 0;
+            jun_un = 1;
         }else{
             jun_un = -1;
         }
@@ -386,6 +396,7 @@ function make_daiun(meishiki, sex){
 
     // 大運の起点となる干支
     let kanshi = ROKUJU_KANSHI_str.indexOf(meishiki[2][0] + meishiki[2][1]);
+
     let daiun = [];
     for(i = 0; i <= 12; i++){
         kanshi += jun_un;
@@ -395,9 +406,10 @@ function make_daiun(meishiki, sex){
         if(kanshi < 0){
             kanshi = 59;
         }
-        daiun.push( [ KAN[ROKUJU_KANSHI[kanshi][0]], SHI[ROKUJU_KANSHI[kanshi][1]]] )
+        daiun.push( ROKUJU_KANSHI_str[kanshi] )
     }
     
+
 
     let daiun_body = document.getElementsByClassName("daiun_body")[0];
     let daiun_table = document.createElement("table");
@@ -415,13 +427,13 @@ function make_daiun(meishiki, sex){
                 idx = daiun.length - 1 - i
                 daiun_kan.push(document.createElement("td"));
                 daiun_kan[idx].className = "daiun_kan" + i;    
-                daiun_kan[idx].textContent = daiun[idx][0];
+                daiun_kan[idx].textContent = daiun[i][0];
                 daiun_row[j].appendChild(daiun_kan[idx]);
             }else{
                 idx = daiun.length - 1 - i
                 daiun_shi.push(document.createElement("td"));
                 daiun_shi[idx].className = "daiun_shi" + i;      
-                daiun_shi[idx].textContent = daiun[idx][1];   
+                daiun_shi[idx].textContent = daiun[i][1];   
                 daiun_row[j].appendChild(daiun_shi[idx]);    
             }
         }    
