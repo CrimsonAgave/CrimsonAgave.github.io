@@ -28,7 +28,7 @@ for(i = 0; i < 5; i++){
         JI_KANSHI[i].push([(2 * i + j) % 10, j % 12]);
     }
 }
-const GOGYO_COLOR = ["#A4D2Bf", "#D79CA7", "#D6D29E", "#B8B8B8", "#757575"] 
+const GOGYO_COLOR = ["#A4D2Bf", "#D79CA7", "#D6D29E", "#B8B8B8", "#909090"] 
 
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -148,6 +148,7 @@ function kanshi(year, month, day, time, minute, prefecture, have_jikanshi){
         display_meishiki(meishiki);
         make_tsuhensei(meishiki);
         make_daiun(meishiki, sex, birth_date, data)
+        make_ryuun(birth_date);
     }
 }
 
@@ -446,37 +447,100 @@ function make_daiun(meishiki, sex, birth_date, setsuiri_data){
     let daiun_kan = [];
     let daiun_shi = [];
     for(j = 0; j < 3; j++){
-        for(i = daiun.length - 1; i >= 0 ; i--){
+        for(i = 0; i < daiun.length ; i++){
             daiun_row.push(document.createElement("tr"));
             daiun_table.appendChild(daiun_row[j]);
             if(j == 0){
-                idx = daiun.length - 1 - i
                 daiun_nen_hyoji.push(document.createElement("td"));
-                daiun_nen_hyoji[idx].textContent = daiun_nen[i];
-                daiun_row[j].appendChild(daiun_nen_hyoji[idx]);
-                daiun_nen_hyoji[idx].style.color = "#fac883";
-                daiun_nen_hyoji[idx].style.fontSize = "60%";
-                daiun_nen_hyoji[idx].style.fontFamily  = "Century";
+                daiun_nen_hyoji[i].textContent = daiun_nen[i];
+                daiun_row[j].appendChild(daiun_nen_hyoji[i]);
+                daiun_nen_hyoji[i].style.color = "#fac883";
+                daiun_nen_hyoji[i].style.fontSize = "60%";
+                daiun_nen_hyoji[i].style.fontFamily  = "Century";
             }else if(j == 1){
-                idx = daiun.length - 1 - i
                 daiun_kan.push(document.createElement("td"));
-                daiun_kan[idx].textContent = daiun[i][0];
-                daiun_row[j].appendChild(daiun_kan[idx]);
+                daiun_kan[i].textContent = daiun[i][0];
+                daiun_row[j].appendChild(daiun_kan[i]);
                 let c = Math.floor(KAN.indexOf(daiun[i][0]) / 2);
-                daiun_kan[idx].style.backgroundColor  = GOGYO_COLOR[c];
+                daiun_kan[i].style.backgroundColor  = GOGYO_COLOR[c];
             }else if(j == 2){
-                idx = daiun.length - 1 - i
                 daiun_shi.push(document.createElement("td"));
-                daiun_shi[idx].textContent = daiun[i][1];   
-                daiun_row[j].appendChild(daiun_shi[idx]);   
+                daiun_shi[i].textContent = daiun[i][1];   
+                daiun_row[j].appendChild(daiun_shi[i]);   
                 let gogyo_shi = [4, 2, 0, 0, 2, 1, 1, 2, 3, 3, 2, 4];
                 let c = gogyo_shi[SHI.indexOf(daiun[i][1])]
-                daiun_shi[idx].style.backgroundColor  = GOGYO_COLOR[c]; 
+                daiun_shi[i].style.backgroundColor  = GOGYO_COLOR[c]; 
             }
-        }    
+        }
     }
+    
+
 }
 
-function make_ryuun(){
+function make_ryuun(birth_date){
+    // 計算
+    const len = 124;
+    const kijun_date = 2023;
+    const kanshi = "癸卯";
+    const today = new Date();
 
+    let gap = birth_date.getFullYear() - kijun_date;
+    let nenun = [];
+    let nenun_nen = [];
+    let toshi = [];         // 年齢。数え年ではない
+    let y = Number(birth_date.getFullYear());
+    for(i = 0; i <= len; i++){
+        let j = (ROKUJU_KANSHI_str.indexOf(kanshi) + gap + i) % 60;
+        nenun.push(ROKUJU_KANSHI_str[j]);
+        nenun_nen.push(birth_date.getFullYear() + i);
+        toshi.push(i);
+    }
+
+    // 表示
+    let nenun_body = document.getElementsByClassName("nenun_body")[0];
+    let nenun_table = document.createElement("table");
+    nenun_body.appendChild(nenun_table);
+
+    let nenun_row = [];
+    let nenun_nen_hyoji = []
+    let nenun_kan = [];
+    let nenun_shi = [];
+    let nen_hyoji = [];
+    for(j = 0; j < 4; j++){
+        for(i = 0; i < nenun.length ; i++){
+            nenun_row.push(document.createElement("tr"));
+            nenun_table.appendChild(nenun_row[j]);
+            if(j == 0){
+                nenun_nen_hyoji.push(document.createElement("td"));
+                nenun_nen_hyoji[i].textContent = nenun_nen[i];
+                nenun_row[j].appendChild(nenun_nen_hyoji[i]);
+                nenun_nen_hyoji[i].style.color = "#fac883";
+                nenun_nen_hyoji[i].style.fontSize = "60%";
+                nenun_nen_hyoji[i].style.fontFamily  = "Century";
+            }else if(j == 1){
+                nenun_kan.push(document.createElement("td"));
+                nenun_kan[i].textContent = nenun[i][0];
+                nenun_row[j].appendChild(nenun_kan[i]);
+                let c = Math.floor(KAN.indexOf(nenun[i][0]) / 2);
+                nenun_kan[i].style.backgroundColor  = GOGYO_COLOR[c];
+            }else if(j == 2){
+                nenun_shi.push(document.createElement("td"));
+                nenun_shi[i].textContent = nenun[i][1];   
+                nenun_row[j].appendChild(nenun_shi[i]);   
+                let gogyo_shi = [4, 2, 0, 0, 2, 1, 1, 2, 3, 3, 2, 4];
+                let c = gogyo_shi[SHI.indexOf(nenun[i][1])]
+                nenun_shi[i].style.backgroundColor  = GOGYO_COLOR[c]; 
+            }else if(j == 3){
+                nen_hyoji.push(document.createElement("td"));
+                nen_hyoji[i].textContent = toshi[i];
+                nenun_row[j].appendChild(nen_hyoji[i]);
+                nen_hyoji[i].style.color = "#fac883";
+                nen_hyoji[i].style.fontSize = "60%";
+                nen_hyoji[i].style.fontFamily = "Century";
+                if(toshi[i] + birth_date.getFullYear() == today.getFullYear()){
+                    nen_hyoji[i].id = "now";
+                }
+            }        
+        }
+    }
 }

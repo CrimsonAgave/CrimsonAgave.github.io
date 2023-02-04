@@ -76,14 +76,14 @@ body {
 
 .username p{
     text-align: center;
-    padding-top: 30px;
+    padding-top: 10px;
     color: #fac883;
     font-size: 130%;
     margin:0;
 }
 
 .birth {
-    padding-top: 30px;
+    padding-top:10px;
 }
 
 .birth p{
@@ -225,6 +225,8 @@ input {
     padding-top: 0;
     overflow-x: auto;
     background-color: #212324;
+    padding-bottom: 20px;
+    direction: rtl;
 }
 
 .daiun_body table{
@@ -239,6 +241,37 @@ input {
     color: #212324;
     padding-left: 7px;
     padding-right: 7px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.nenun_board{
+    padding-top:20px;
+    text-align: center;
+    color: #fac883;
+}
+
+
+.nenun_body{
+    margin-top: 0;
+    padding-top: 0;
+    overflow-x: auto;
+    background-color: #212324;
+    direction: rtl;    
+}
+
+.nenun_body table{
+    font-size: 130%;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: serif;
+} 
+
+.nenun_body td{
+    border-color: #fac883;
+    color: #212324;
+    padding-left: 3px;
+    padding-right: 3px;
     padding-top: 0;
     padding-bottom: 0;
 }
