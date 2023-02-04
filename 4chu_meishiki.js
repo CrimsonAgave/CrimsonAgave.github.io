@@ -5,6 +5,10 @@ var ROKUJU_KANSHI = [];
 for(i = 0; i < 60; i++){
     ROKUJU_KANSHI.push([i % 10, i % 12]);
 }
+var ROKUJU_KANSHI_str = []
+for(i = 0; i < 60; i++){
+    ROKUJU_KANSHI_str.push(KAN[i % 10] + SHI[i % 12]);
+}
 var GETSU_KANSHI = [];
 for(i = 0; i < 5; i++){
     GETSU_KANSHI.push([])
@@ -131,6 +135,7 @@ function kanshi(year, month, day, time, minute, prefecture){
         meishiki = [[jikan, jishi], [nikkan, nitshi], [gekkan, getshi], [nenkan, nenshi]];
         display_meishiki(meishiki);
         make_tsuhensei(meishiki);
+        make_daiun(meishiki, sex)
     }
 }
 
@@ -310,8 +315,8 @@ var TSUHENSEI_MATRIX   = [  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
                             [6, 7, 8, 9, 0, 1, 2, 3, 4, 5],
                             [7, 6, 9, 8, 1, 0, 3, 2, 5, 4],
                             [4, 5, 6, 7, 8, 9, 0, 1, 2, 3],
-                            [5, 4, 7, 6, 9, 8, 1, 0, 3, 2]
-                            [2, 3, 4, 5, 6, 7, 8, 9, 0, 1]
+                            [5, 4, 7, 6, 9, 8, 1, 0, 3, 2],
+                            [2, 3, 4, 5, 6, 7, 8, 9, 0, 1],
                             [3, 2, 5, 4, 7, 6, 9, 8, 1, 0]];
 var SAME_YINYANG_SHItoKAN = [8, 5, 0, 1, 4, 3, 2, 5, 6, 7, 4, 9];
 var TSUHENSEI = ["比肩", "劫財", "食神", "傷官", "偏財", "正財", "偏官", "正官", "偏印", "正印" ];
@@ -360,10 +365,69 @@ function culc_matrix(idx, nikkan){
     return result;
 }
 
-function culc_gogyo(meishiki){
+function make_daiun(meishiki, sex){
+    let jun_un = 0;
+    let nenkan_yang = ((KAN.indexOf(meishiki[3][0]) + 1) % 2)
 
+    // 順運か逆運か
+    if(sex == 1){
+        if(nenkan_yang == 1){
+            jun_un = 1;
+        }else{
+            jun_un = -1;
+        }
+    }else{
+        if(nenkan_yang == 1){
+            jun_un = 0;
+        }else{
+            jun_un = -1;
+        }
+    }
+
+    // 大運の起点となる干支
+    let kanshi = ROKUJU_KANSHI_str.indexOf(meishiki[2][0] + meishiki[2][1]);
+    let daiun = [];
+    for(i = 0; i <= 12; i++){
+        kanshi += jun_un;
+        if(kanshi >= 60){
+            kanshi = 0;   
+        }
+        if(kanshi < 0){
+            kanshi = 59;
+        }
+        daiun.push( [ KAN[ROKUJU_KANSHI[kanshi][0]], SHI[ROKUJU_KANSHI[kanshi][1]]] )
+    }
+    
+
+    let daiun_body = document.getElementsByClassName("daiun_body")[0];
+    let daiun_table = document.createElement("table");
+    daiun_body.appendChild(daiun_table);
+
+    let daiun_row = [];
+    let daiun_kan = [];
+    let daiun_shi = [];
+    for(j = 0; j < 2; j++){
+        for(i = daiun.length - 1; i >= 0 ; i--){
+            daiun_row.push(document.createElement("tr"));
+            daiun_table.appendChild(daiun_row[j]);
+
+            if(j == 0){
+                idx = daiun.length - 1 - i
+                daiun_kan.push(document.createElement("td"));
+                daiun_kan[idx].className = "daiun_kan" + i;    
+                daiun_kan[idx].textContent = daiun[idx][0];
+                daiun_row[j].appendChild(daiun_kan[idx]);
+            }else{
+                idx = daiun.length - 1 - i
+                daiun_shi.push(document.createElement("td"));
+                daiun_shi[idx].className = "daiun_shi" + i;      
+                daiun_shi[idx].textContent = daiun[idx][1];   
+                daiun_row[j].appendChild(daiun_shi[idx]);    
+            }
+        }    
+    }
 }
 
-function make_zokan(meishiki){
+function make_ryuun(){
 
 }
