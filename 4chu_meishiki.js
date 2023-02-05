@@ -67,8 +67,8 @@ function readCookie(){
     let element_birthtime = document.getElementById("birthtime");
     if(time == "" || minute == ""){
         birth_text += "時刻：不明";
-        time = 12;
-        minute = -1; 
+        time = 0;
+        minute = 0; 
         have_jikanshi = false;
     }else{
         birth_text += "時刻：" + time + " 時 " + minute + " 分";
@@ -440,24 +440,31 @@ function make_daiun(meishiki, sex, birth_date, setsuiri_data){
     let term_ritsuun = 0
     for(i = 0; i < setsuiri_data.length; i++){
         if(birth_date.getFullYear() == Number(setsuiri_data[i][0]) && birth_date.getMonth() + 1 == Number(setsuiri_data[i][1])){
-            let setsuiri_date = new Date(setsuiri_data[i][0], setsuiri_data[i][1], setsuiri_data[i][2], setsuiri_data[i][3], setsuiri_data[i][4]);
+            let setsuiri_date = new Date(setsuiri_data[i][0], Number(setsuiri_data[i][1]) - 1, setsuiri_data[i][2] , setsuiri_data[i][3], setsuiri_data[i][4]);
+            let d = 0;
             if(jun_un == 1){
-                if(birth_date - setsuiri_date > 0){
-                    d = new Date(setsuiri_data[i+1][0], setsuiri_data[i+1][1], setsuiri_data[i+1][2], setsuiri_data[i+1][3], setsuiri_data[i+1][4]);
-                }else{
-                    d = new Date(setsuiri_data[i][0], setsuiri_data[i][1], setsuiri_data[i][2], setsuiri_data[i][3], setsuiri_data[i][4]);
-                }
-            }else{
                 if(birth_date - setsuiri_date > 0){
                     d = new Date(setsuiri_data[i][0], setsuiri_data[i][1], setsuiri_data[i][2], setsuiri_data[i][3], setsuiri_data[i][4]);
                 }else{
                     d = new Date(setsuiri_data[i-1][0], setsuiri_data[i-1][1], setsuiri_data[i-1][2], setsuiri_data[i-1][3], setsuiri_data[i-1][4]);
                 }
-                console.log(setsuiri_data[i])
-                console.log(d)
+            }else{
+
+                if(birth_date - setsuiri_date > 0){
+                    d = new Date(setsuiri_data[i-1][0], setsuiri_data[i-1][1], setsuiri_data[i-1][2], setsuiri_data[i-1][3], setsuiri_data[i-1][4]);
+                }else{
+                    d = new Date(setsuiri_data[i-2][0], setsuiri_data[i-2][1], setsuiri_data[i-2][2], setsuiri_data[i-2][3], setsuiri_data[i-2][4]);
+                }
+
             }
-            term_ritsuun = Math.abs(birth_date - d);
-            term_ritsuun = Math.round((term_ritsuun / 1000 / 60 / 60 / 24 / 3 )* 10) / 10
+            console.log(birth_date);
+            console.log(d)
+
+            term_ritsuun = Math.abs(birth_date - d) / 86400000;
+            console.log(term_ritsuun);
+
+            term_ritsuun = Math.round((term_ritsuun / 3) * 10 ) / 10;
+
 
         }
     }
