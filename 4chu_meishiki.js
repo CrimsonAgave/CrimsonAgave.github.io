@@ -236,7 +236,6 @@ function make_nikkanshi(birth_date, prefecture){
     let gyap_md = 0
     for(let i = 1; birth_date.getMonth() >= i; i++){
         gyap_md += new Date(birth_date.getFullYear(), i, 0).getDate();
-        console.log(new Date(birth_date.getFullYear(), i, 0).getDate());
     }
     gyap_md += birth_date.getDate();
     let gyap_d = 365 * gyap_y + Math.floor((gyap_y - 3) / 4) + gyap_md;
@@ -244,7 +243,6 @@ function make_nikkanshi(birth_date, prefecture){
     if(nikkanshi_idx < 0){
         nikkanshi_idx += 60;
     }
-    console.log(gyap_d)
 
     // 時差
     if(prefecture == "不明"){
@@ -441,17 +439,26 @@ function make_daiun(meishiki, sex, birth_date, setsuiri_data){
     // 立運
     let term_ritsuun = 0
     for(i = 0; i < setsuiri_data.length; i++){
-        if(birth_date.getFullYear() == Number(setsuiri_data[i][0]) && birth_date.getMonth()+1 == Number(setsuiri_data[i][1])){
+        if(birth_date.getFullYear() == Number(setsuiri_data[i][0]) && birth_date.getMonth() + 1 == Number(setsuiri_data[i][1])){
+            let setsuiri_date = new Date(setsuiri_data[i][0], setsuiri_data[i][1], setsuiri_data[i][2], setsuiri_data[i][3], setsuiri_data[i][4]);
             if(jun_un == 1){
-                let setsuiri_date = new Date(setsuiri_data[i][0], setsuiri_data[i][1], setsuiri_data[i][2], setsuiri_data[i][3], setsuiri_data[i][4])
-                term_ritsuun = setsuiri_date - birth_date;
-                term_ritsuun = Math.round((term_ritsuun / 1000 / 60 / 60 / 24 / 3 )* 10) / 10
+                if(birth_date - setsuiri_date > 0){
+                    d = new Date(setsuiri_data[i+1][0], setsuiri_data[i+1][1], setsuiri_data[i+1][2], setsuiri_data[i+1][3], setsuiri_data[i+1][4]);
+                }else{
+                    d = new Date(setsuiri_data[i][0], setsuiri_data[i][1], setsuiri_data[i][2], setsuiri_data[i][3], setsuiri_data[i][4]);
+                }
             }else{
-                let setsuiri_date = new Date(setsuiri_data[i-1][0], setsuiri_data[i-1][1], setsuiri_data[i-1][2], setsuiri_data[i-1][3], setsuiri_data[i-1][4])
-                term_ritsuun = birth_date - setsuiri_date;
-                term_ritsuun = Math.round((term_ritsuun / 1000 / 60 / 60 / 24 / 3) * 10) / 10
+                if(birth_date - setsuiri_date > 0){
+                    d = new Date(setsuiri_data[i][0], setsuiri_data[i][1], setsuiri_data[i][2], setsuiri_data[i][3], setsuiri_data[i][4]);
+                }else{
+                    d = new Date(setsuiri_data[i-1][0], setsuiri_data[i-1][1], setsuiri_data[i-1][2], setsuiri_data[i-1][3], setsuiri_data[i-1][4]);
+                }
+                console.log(setsuiri_data[i])
+                console.log(d)
             }
-            break;
+            term_ritsuun = Math.abs(birth_date - d);
+            term_ritsuun = Math.round((term_ritsuun / 1000 / 60 / 60 / 24 / 3 )* 10) / 10
+
         }
     }
     let daiun_nen = []
@@ -510,9 +517,8 @@ function make_daiun(meishiki, sex, birth_date, setsuiri_data){
             }
         }
     }
-    
-
 }
+
 
 function make_ryuun(birth_date){
     // 年運計算
