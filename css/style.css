@@ -298,6 +298,7 @@ input {
     margin-left: auto;
     margin-right: auto;
     font-family: serif;
+    padding-bottom: 12px;
 } 
 
 .getsuun_body td{

@@ -24,15 +24,13 @@ const SETSUIRI_LIST = ["小寒", "立春", "啓蟄", "清明", "立夏", "芒種
 var JI_KANSHI = [];
 for(i = 0; i < 5; i++){
     JI_KANSHI.push([])
-    for(j = 0; j < 13   ; j++){
+    for(j = 0; j < 12; j++){
         JI_KANSHI[i].push([(2 * i + j) % 10, j % 12]);
     }
 }
 for(let i = 0; i < 5; i++){
-    JI_KANSHI[i][12] = JI_KANSHI[i][0];
+    JI_KANSHI[i].push(JI_KANSHI[i][0]);
 }
-
-console.log(JI_KANSHI[0])
 const GOGYO_COLOR = ["#A4D2Bf", "#D79CA7", "#D6D29E", "#B8B8B8", "#909090"] 
 
 
@@ -233,15 +231,31 @@ var Prefectures_x = [141.347899,140.740593,141.152667,140.872103,140.102334,
 
 
 function make_nikkanshi(birth_date, prefecture){
-    const criterion = new Date(1850, 1, 1, 0, 0);           // 丙寅: 2
-    let nissu = (birth_date - criterion) / 86400000;
-    let nikkanshi_idx = Math.floor((nissu + 20) % 60) - 1;
+    let criterion = new Date(1970, 1, 1, 12, 0); 
+    let gyap_y = (birth_date.getFullYear() - criterion.getFullYear());
+    let gyap_md = 0
+    for(let i = 1; birth_date.getMonth() >= i; i++){
+        gyap_md += new Date(birth_date.getFullYear(), i, 0).getDate();
+        console.log(new Date(birth_date.getFullYear(), i, 0).getDate());
+    }
+    gyap_md += birth_date.getDate();
+    let gyap_d = 365 * gyap_y + Math.floor((gyap_y - 3) / 4) + gyap_md;
+    let nikkanshi_idx = (gyap_d + 17) % 60
+    if(nikkanshi_idx < 0){
+        nikkanshi_idx += 60;
+    }
+    console.log(gyap_d)
 
     // 時差
-    let Prefecture_idx = Prefectures_name.indexOf(prefecture);
-    longitude = Prefectures_x[Prefecture_idx];
-    jisa_minutes = Math.round((longitude - 135) * 4);
+    if(prefecture == "不明"){
+        jisa_minutes = 0;
+    }else{
+        let Prefecture_idx = Prefectures_name.indexOf(prefecture);
+        let longitude = Prefectures_x[Prefecture_idx];
+        jisa_minutes = Math.round((longitude - 135) * 4);    
+    }
     let time = 0;
+
     if(birth_date.getMinutes() + jisa_minutes >= 60){
         time = (birth_date.getHours() + 1 + 1);
         if(time > 24){ 
@@ -265,8 +279,13 @@ function make_nikkanshi(birth_date, prefecture){
 function make_jikanshi(birth_date, nikkannshi_idx, prefecture){
     // 時差
     let Prefecture_idx = Prefectures_name.indexOf(prefecture);
-    longitude = Prefectures_x[Prefecture_idx];
-    jisa_minutes = Math.round((longitude - 135) * 4);
+    if(prefecture == "不明"){
+        jisa_minutes = 0;
+    }else{
+        let longitude = Prefectures_x[Prefecture_idx];
+        jisa_minutes = Math.round((longitude - 135) * 4);    
+    }
+
     let time = 0;
     if(birth_date.getMinutes() + jisa_minutes >= 60){
         time = (birth_date.getHours() + 1 + 1);
@@ -278,7 +297,6 @@ function make_jikanshi(birth_date, nikkannshi_idx, prefecture){
         time = (birth_date.getHours() + 1);
     }
     let shi_idx = Math.floor(time / 2);    
-    
     let kan_idx = nikkannshi_idx[0] % 5;
 
 
