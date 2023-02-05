@@ -461,7 +461,6 @@ function make_daiun(meishiki, sex, birth_date, setsuiri_data){
             console.log(d)
 
             term_ritsuun = Math.abs(birth_date - d) / 86400000;
-            console.log(term_ritsuun);
 
             term_ritsuun = Math.round((term_ritsuun / 3) * 10 ) / 10;
 
