@@ -383,7 +383,7 @@ function make_tsuhensei(meishiki){
     let gekkan_tsuhensei = document.getElementById("gekkan_tsuhensei");
     gekkan_tsuhensei.innerHTML = gekkan;
     let getshi_tsuhensei = document.getElementById("getshi_tsuhensei");
-    getshi_tsuhensei.innerHTML = gekkan;
+    getshi_tsuhensei.innerHTML = getshi;
     let nenkan_tsuhensei = document.getElementById("nenkan_tsuhensei");
     nenkan_tsuhensei.innerHTML = nenkan;
     let nenshi_tsuhensei = document.getElementById("nenshi_tsuhensei");
