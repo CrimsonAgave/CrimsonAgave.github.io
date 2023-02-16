@@ -355,7 +355,7 @@ var TSUHENSEI_MATRIX   = [  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
                             [5, 4, 7, 6, 9, 8, 1, 0, 3, 2],
                             [2, 3, 4, 5, 6, 7, 8, 9, 0, 1],
                             [3, 2, 5, 4, 7, 6, 9, 8, 1, 0]];
-var SAME_YINYANG_SHItoKAN = [8, 5, 0, 1, 4, 3, 2, 5, 6, 7, 4, 9];
+var SAME_YINYANG_SHItoKAN = [8, 5, 0, 1, 4, 2, 3, 5, 6, 7, 4, 9];
 var TSUHENSEI = ["比肩", "劫財", "食神", "傷官", "偏財", "正財", "偏官", "正官", "偏印", "正印" ];
 
 function make_tsuhensei(meishiki){
