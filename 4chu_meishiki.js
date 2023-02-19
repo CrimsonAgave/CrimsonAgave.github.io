@@ -252,19 +252,18 @@ function make_nikkanshi(birth_date, prefecture){
         let longitude = Prefectures_x[Prefecture_idx];
         jisa_minutes = Math.round((longitude - 135) * 4);    
     }
-    let time = 0;
+    let time = birth_date.getHours();
 
     if(birth_date.getMinutes() + jisa_minutes >= 60){
-        time = (birth_date.getHours() + 1 + 1);
-        if(time > 24){ 
-            nikkanshi_idx = Math.floor((nissu + 1 + 20) % 60) - 1;
-        }
+        time += 1
     }else if(birth_date.getMinutes() + jisa_minutes < 0){
-        time = (birth_date.getHours() + 1 - 1);
-        if(time <= 0){ 
-            nikkanshi_idx = Math.floor((nissu - 1 + 20) % 60) - 1;
-        }
+        time -= 1
     }
+
+    if(time >= 23){
+        nikkanshi_idx = nikkanshi_idx + 1;
+    }
+
     if(nikkanshi_idx < 0){
         nikkanshi_idx = 59;
     }
@@ -457,8 +456,6 @@ function make_daiun(meishiki, sex, birth_date, setsuiri_data){
                 }
 
             }
-            console.log(birth_date);
-            console.log(d)
 
             term_ritsuun = Math.abs(birth_date - d) / 86400000;
 
