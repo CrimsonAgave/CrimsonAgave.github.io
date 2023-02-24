@@ -325,7 +325,7 @@ footer {
 }
 
 .none {
-    height: 100vh;
+    height: 50%;
 }
 
 .pass_button{
@@ -335,6 +335,73 @@ footer {
 
 .button_wrapper{
     text-align:center;
-    padding-top: 50%;
- }
+}
  
+
+.eki_button{
+    height: 6vh;
+    width: 12vh;
+    font-size: 150%;
+    font-family: '游明朝','Yu Mincho',YuMincho,'Hiragino Mincho Pro',serif;
+}
+ 
+.rokujuyon_ka {
+    text-align: center;
+    padding-top: 3vh;
+}
+
+.ka {
+    display: inline-block;
+
+    color: #fac883;
+    -webkit-writing-mode: vertical-rl;
+    -moz-writing-mode: vertical-rl;
+    -ms-writing-mode: tb-rl;
+    -ms-writing-mode: vertical-rl;
+    writing-mode: vertical-rl;
+    font-size: 1500%;
+}
+
+.box2{
+    padding: 3vh;
+}
+
+.ka_name{
+    color: #fac883;
+    font-size: 150%;
+}
+
+.kou{
+    color: #fac883;
+    padding-top: 2vh;
+    font-size: 150%;
+}
+
+.bottom{
+    height:15vh;
+}
+
+.eki_title{
+    padding-top: 10vh;
+    text-align: center;
+    color: #fac883;
+    font-size: 300%;
+    font-family: '游明朝','Yu Mincho',YuMincho,'Hiragino Mincho Pro',serif;
+}
+
+
+
+
+
+.others {
+    text-align: center;
+    color: #fac883;
+    background-color: #212324;
+    margin-top: 0;
+    padding: 10px;
+}
+
+.others a{
+    color:inherit;
+    font-size: 150%;
+}
