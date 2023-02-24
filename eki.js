@@ -12,6 +12,17 @@ DOUBLE_KA_NAME =[
 ]
 kansuji = ["一", "二", "三", "四", "五", "六"]
 
+NUM_DOUBKE_KA = [
+                1, 43, 14, 34, 9, 5, 26, 11,
+                10, 58, 38, 54, 61, 60, 41, 19,
+                13, 49, 30, 55, 37, 63, 22, 36,
+                24, 17, 21, 51, 42, 3, 27, 24,
+                44, 28, 50, 32, 57, 48, 18, 46, 
+                6, 47, , 40, 59, 29, 4, 7,
+                33, 31, 56, 64, 53, 39, 52, 15,
+                12, 45, 35, 16, 20, 8, 23, 2
+]
+
 function ekisen(){
     rokujuyon_ka = [random_hakka(), random_hakka()];
     let kou_num = random_kou();
@@ -19,15 +30,14 @@ function ekisen(){
     let double_ka = document.getElementById("ka");
     double_ka.innerHTML = KA[rokujuyon_ka[0]] + KA[rokujuyon_ka[1]];
 
-    let num = 1 + rokujuyon_ka[0] * 8 + rokujuyon_ka[1];
+    let num = 1 + rokujuyon_ka[1] * 8 + rokujuyon_ka[0];
 
     let double_ka_name = document.getElementById("ka_name");
     if(rokujuyon_ka[0] != rokujuyon_ka[1]){
-        double_ka_name.innerHTML = num + ".　" + KA_kanji[rokujuyon_ka[0]] + KA_kanji[rokujuyon_ka[1]] + DOUBLE_KA_NAME[num-1];    
+        double_ka_name.innerHTML = NUM_DOUBKE_KA[num-1] + ".　" + KA_kanji[rokujuyon_ka[0]] + KA_kanji[rokujuyon_ka[1]] + DOUBLE_KA_NAME[num-1];    
     }else{
-        double_ka_name.innerHTML = num + ".　" + DOUBLE_KA_NAME[num-1]
+        double_ka_name.innerHTML = NUM_DOUBKE_KA[num-1] + ".　" + DOUBLE_KA_NAME[num-1]
     }
-
 
     let kou = document.getElementById("kou");
     if(kou_num == 0){
