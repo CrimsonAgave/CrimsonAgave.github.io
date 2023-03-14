@@ -608,7 +608,7 @@ function make_ryuun(birth_date){
     let getsuun = [];
     let getsuun_getsu = [];
     for(i = 0; i < getsu_len; i++){
-        let j = (ROKUJU_KANSHI_str.indexOf(kanshi) + gap_g + i - 12 + 8) % 60;
+        let j = (ROKUJU_KANSHI_str.indexOf(kanshi) + gap_g + i - 12 + 7) % 60;
         getsuun.push(ROKUJU_KANSHI_str[j]);
         getsuun_getsu.push(i % 12 + 1);
     }
