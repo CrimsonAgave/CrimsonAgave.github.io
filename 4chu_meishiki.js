@@ -55,12 +55,22 @@ function readCookie(){
     minute = cookie_data[6];
     birthplace = cookie_data[7];
 
+    let now_date = new Date();
+
+    let user_title = "";
     let element_name = document.getElementById("username");
     if(username == ""){
-        element_name.innerHTML = "匿名";
+        user_title += "匿名";
     }else{
-        element_name.innerHTML = username;
+        user_title += username;
     }
+    if(sex == 1){
+        user_title += "<br>男　"
+    }else{
+        user_title += "<br>女　"
+    }
+    user_title += now_date.getFullYear() - year + "歳"
+    element_name.innerHTML = user_title;
 
     let birth_text = "生年月日：　";
     birth_text += year + " 年 " + month + " 月 " + day + " 日　";
@@ -633,6 +643,7 @@ function make_ryuun(birth_date){
                 getsuun_getsu_hyoji[i].style.color = "#fac883";
                 getsuun_getsu_hyoji[i].style.fontSize = "60%";
                 getsuun_getsu_hyoji[i].style.fontFamily  = "Century";
+                
                 if((Math.floor(i / 12) == 1) && (today.getMonth() + 1 == getsuun_getsu[i])){
                     getsuun_getsu_hyoji[i].style.backgroundColor = "#fac883";
                     getsuun_getsu_hyoji[i].style.color = "#212324";
