@@ -389,6 +389,88 @@ footer {
     font-family: '游明朝','Yu Mincho',YuMincho,'Hiragino Mincho Pro',serif;
 }
 
+.jikan_tsuhensei{
+    font-size: 18px;
+}
+.gekkan_tsuhensei{
+    font-size: 18px;
+}
+.nenkan_tsuhensei{
+    font-size: 18px;
+}
+.jikan_tsuhensei{
+    font-size: 18px;
+}
+
+.jishi_tsuhensei{
+    font-size: 18px;
+}
+.nitshi_tsuhensei{
+    font-size: 18px;
+}
+.getshi_tsuhensei{
+    font-size: 18px;
+}
+.nenshi_tsuhensei{
+    font-size: 18px;
+}
+
+
+.outer_jishi_zokan{
+    display: table;
+    width: 100%;
+    height: 40px;
+    font-size: 13px;
+}
+
+.jishi_zokan{
+    display: table-cell;
+    vertical-align: bottom;
+}
+
+.outer_nitshi_zokan{
+    display: table;
+    width: 100%;
+    height: 40px;
+    font-size: 13px;
+}
+
+.nitshi_zokan{
+    display: table-cell;
+    vertical-align: bottom;
+}
+
+.outer_getshi_zokan{
+    display: table;
+    width: 100%;
+    height: 40px;
+    font-size: 13px;
+}
+
+.getshi_zokan{
+    display: table-cell;
+    vertical-align: bottom;
+}
+
+.outer_nenshi_zokan{
+    display: table;
+    width: 100%;
+    height: 40px;
+    font-size: 13px;
+}
+
+.nenshi_zokan{
+    display: table-cell;
+    vertical-align: bottom;
+}
+
+
+.gogyo td{
+    padding-left:3vh;
+    padding-right:3vh;
+    font-size: 13px;
+}
+
 .others {
     text-align: center;
     color: #fac883;

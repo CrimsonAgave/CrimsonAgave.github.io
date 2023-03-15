@@ -1,6 +1,7 @@
 
 const KAN = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"];
 const SHI = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"];
+const ZOKAN = ["壬癸", "癸辛己", "戊丙甲", "甲乙", "乙癸戊", "戊庚丙", "丙丁", "丁乙己", "戊壬庚", "庚辛", "辛丁戊", "戊甲壬"];
 var ROKUJU_KANSHI = [];
 for(i = 0; i < 60; i++){
     ROKUJU_KANSHI.push([i % 10, i % 12]);
@@ -162,6 +163,8 @@ function kanshi(year, month, day, time, minute, prefecture, have_jikanshi){
         make_tsuhensei(meishiki);
         make_daiun(meishiki, sex, birth_date, data)
         make_ryuun(birth_date);
+        count_gogyo(meishiki)
+        make_zokan(meishiki)
     }
 }
 
@@ -664,4 +667,45 @@ function make_ryuun(birth_date){
             }
         }
     }
+}
+
+function count_gogyo(meishiki){
+    const SHI_GOGYO = [4, 2, 0, 0, 2, 1, 1, 2, 3, 3, 2, 4];
+    let num_gogyo = [0, 0, 0, 0, 0];
+    
+    for(i = 0; i <= 3; i++){
+        // 天干の五行を数える
+        let tmp1 = Math.floor(KAN.indexOf(meishiki[i][0]) / 2);
+        num_gogyo[tmp1] += 1;
+        // 地支の五行を数える
+        let tmp2 = SHI_GOGYO[SHI.indexOf(meishiki[i][1])];
+        num_gogyo[tmp2] += 1;
+    }
+
+    let moku = document.getElementById("moku");
+    moku.innerHTML = "木(" + num_gogyo[0] + ")";
+    let ka = document.getElementById("ka");
+    ka.innerHTML = "火(" + num_gogyo[1] + ")";
+    let tsuchi = document.getElementById("do");
+    tsuchi.innerHTML = "土(" + num_gogyo[2] + ")";
+    let kin = document.getElementById("kin");
+    kin.innerHTML = "金(" + num_gogyo[3] + ")"
+    let sui = document.getElementById("sui");
+    sui.innerHTML = "水(" + num_gogyo[4] + ")";
+}
+
+function make_zokan(meishiki){
+    let chishi_zokan = ["", "", "", ""]
+    for(i = 0; i <= 3; i++){
+        chishi_zokan[i] = ZOKAN[SHI.indexOf(meishiki[i][1])];
+    }
+
+    let jishi_zokan = document.getElementById("jishi_zokan");
+    jishi_zokan.innerHTML = chishi_zokan[0];
+    let nitshi_zokan = document.getElementById("nitshi_zokan");
+    nitshi_zokan.innerHTML = chishi_zokan[1];
+    let getshi_zokan = document.getElementById("getshi_zokan");
+    getshi_zokan.innerHTML = chishi_zokan[2];
+    let nenshi_zokan = document.getElementById("nenshi_zokan");
+    nenshi_zokan.innerHTML = chishi_zokan[3];
 }
