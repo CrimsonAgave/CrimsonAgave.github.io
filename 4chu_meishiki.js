@@ -697,7 +697,9 @@ function count_gogyo(meishiki){
 function make_zokan(meishiki){
     let chishi_zokan = ["", "", "", ""]
     for(i = 0; i <= 3; i++){
-        chishi_zokan[i] = ZOKAN[SHI.indexOf(meishiki[i][1])];
+        if(meishiki[i][1] != "不明"){
+            chishi_zokan[i] = ZOKAN[SHI.indexOf(meishiki[i][1])];
+        }
     }
 
     let jishi_zokan = document.getElementById("jishi_zokan");
