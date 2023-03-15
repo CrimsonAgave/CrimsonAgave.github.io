@@ -472,9 +472,7 @@ function make_daiun(meishiki, sex, birth_date, setsuiri_data){
 
             term_ritsuun = Math.abs(birth_date - d) / 86400000;
 
-            term_ritsuun = Math.round((term_ritsuun / 3) * 10 - 10) / 10;
-
-
+            term_ritsuun = Math.round((term_ritsuun / 3) * 10 ) / 10;
         }
     }
     let daiun_nen = []
