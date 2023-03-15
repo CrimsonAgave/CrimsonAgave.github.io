@@ -480,9 +480,9 @@ function make_daiun(meishiki, sex, birth_date, setsuiri_data){
     let daiun_nen = []
     for(i = 0; i <= 12; i++){
         if(i == 0){
-            daiun_nen.push(term_ritsuun + i * 10 );
+            daiun_nen.push(term_ritsuun + i * 10 - 1);
         }else{
-            daiun_nen.push(Math.round(term_ritsuun) + i * 10);
+            daiun_nen.push(Math.round(term_ritsuun) + i * 10 - 1);
         }
     }
 
