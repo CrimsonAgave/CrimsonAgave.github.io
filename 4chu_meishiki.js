@@ -57,6 +57,7 @@ function readCookie(){
     birthplace = cookie_data[7];
 
     let now_date = new Date();
+    let birth_date = new Date(now_date.getFullYear(), month, day)
 
     let user_title = "";
     let element_name = document.getElementById("username");
@@ -70,7 +71,11 @@ function readCookie(){
     }else{
         user_title += "<br>女　"
     }
-    user_title += now_date.getFullYear() - year + "歳"
+    if(now_date > birth_date){
+        user_title += now_date.getFullYear() - year + "歳"
+    }else{
+        user_title += now_date.getFullYear() - year - 1 + "歳"
+    }
     element_name.innerHTML = user_title;
 
     let birth_text = "生年月日：　";
@@ -708,4 +713,8 @@ function make_zokan(meishiki){
     getshi_zokan.innerHTML = chishi_zokan[2];
     let nenshi_zokan = document.getElementById("nenshi_zokan");
     nenshi_zokan.innerHTML = chishi_zokan[3];
+}
+
+function make_gochukei(meishiki){
+    
 }

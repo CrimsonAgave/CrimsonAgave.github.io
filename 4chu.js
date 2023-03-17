@@ -27,11 +27,12 @@ function make_meishiki(){
     
         if(isNaN(date.getDate()) || !(1 <= month.value && month.value <= 12) || !(1 <= day.value && day.value <= 31)){
             alert("適切な生年月日を入力してください");
-        }else if(!(1851 <= year.value && year.value <= 2050)){
-            alert(本サイトで命式を作成できるのは1851年から2050年までです)
+        }else if(!(1851 <= Number(year.value) && Number(year.value) <= 2050)){
+            alert("本サイトで命式を作成できるのは1851年から2050年までです");
         }else{
             confirmed = true;
         }
+
     }
 
     var days = null;
