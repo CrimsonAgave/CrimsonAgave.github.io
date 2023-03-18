@@ -168,8 +168,9 @@ function kanshi(year, month, day, time, minute, prefecture, have_jikanshi){
         make_tsuhensei(meishiki);
         make_daiun(meishiki, sex, birth_date, data)
         make_ryuun(birth_date);
-        count_gogyo(meishiki)
-        make_zokan(meishiki)
+        count_gogyo(meishiki);
+        make_zokan(meishiki);
+        make_gochukei(meishiki);
     }
 }
 
@@ -716,5 +717,187 @@ function make_zokan(meishiki){
 }
 
 function make_gochukei(meishiki){
-    
+    let gochukei_list = [];
+
+    for(let i = 0; i <= 1; i++){
+        for(let j = 0; j <= 2; j++){
+            tmp = make_pair_gochukei(meishiki[j][i], meishiki[j+1][i]);
+            gochukei_list = gochukei_list.concat(tmp);
+        }
+    }
+    // 三合
+    tmp = make_san_go(meishiki);
+    gochukei_list = gochukei_list.concat(tmp);
+
+    // 三刑
+    tmp = make_san_kei(meishiki);
+    gochukei_list = gochukei_list.concat(tmp);
+
+    let gochukei_display = "";
+    for(let i = 0; i < gochukei_list.length; i++){
+        if((i >= 1) && (gochukei_list[i][0] == gochukei_list[i-1][0])){
+            gochukei_display += ", " + gochukei_list[i][1]
+        }else{
+            gochukei_display += "　" + gochukei_list[i][0] + ": " + gochukei_list[i][1]
+        }
+    }
+
+    let gochukei = document.getElementById("go_chu_kei");
+    gochukei.innerHTML = gochukei_display;
+}
+
+function make_pair_gochukei(str1, str2){
+    let pair_ji = str1 + str2;
+    let gochukei_list = [];
+
+    // 干合
+    let kan_go_pair = [];
+    const kango_goka = ["土", "金", "水", "木", "火"];
+    for(let i = 0; i <= 4; i++){
+        kan_go_pair[i] = KAN[i] + KAN[i + 5];
+        kan_go_pair[i + 5] = KAN[i + 5] + KAN[i];
+    }
+    if(kan_go_pair.includes(pair_ji)){
+        gochukei_list.push(["干合", pair_ji + "(" + kango_goka[Math.floor(kan_go_pair.indexOf(pair_ji) % 5)] + ")"]);
+    }
+
+    // 六合
+    const riku_go_pair = ["寅亥", "卯戌", "辰酉", "巳申", "午未", "子丑",
+                          "亥寅", "戌卯", "酉辰", "申巳", "未午", "丑子"];
+    const rikugo_goka = ["土", "火", "金", "水", "空", "土"];
+    if(riku_go_pair.includes(pair_ji)){
+        gochukei_list.push(["六合", pair_ji + "(" + rikugo_goka[Math.floor(riku_go_pair.indexOf(pair_ji) % 6)] + ")"])
+    }
+
+    // 天干 冲
+    const tenkan_chu_pair = ["甲庚", "庚甲", "乙辛", "辛乙", "丙壬", "壬丙", "丁癸", "癸丁"];
+    if(tenkan_chu_pair.includes(pair_ji)){
+        gochukei_list.push(["冲", pair_ji]);
+    }
+
+    // 地支 冲
+    const chishi_chu_pair = ["子午", "午子", "丑未", "未丑", "寅申", "申寅", "卯酉", "酉卯", "辰戌", "戌辰", "巳亥", "亥巳"];
+    if(chishi_chu_pair.includes(pair_ji)){
+        gochukei_list.push(["冲", pair_ji]);
+    }
+
+    // 相刑
+    const sokei_pair = ["子卯"]
+    if(sokei_pair.includes(pair_ji)){
+        gochukei_list.push(["刑", pair_ji]);
+    }
+
+    //　自刑
+    const jike_pair = ["辰辰", "午午", "酉酉", "亥亥"];
+    if(jike_pair.includes(pair_ji)){
+        gochukei_list.push(["刑", pair_ji]);
+    }
+
+    return gochukei_list;
+}
+
+// 六合
+const san_go_pair = ["寅午戌", "寅戌午", "午寅戌", "午戌寅", "戌寅午", "戌午寅",
+                     "巳酉丑", "巳丑酉", "酉巳丑", "酉丑巳", "丑巳酉", "丑酉巳",
+                     "申子辰", "申辰子", "子申辰", "子辰申", "辰申子", "辰子申",
+                     "亥卯未", "亥未卯", "卯亥未", "卯未亥", "未亥卯", "未卯亥"]
+// 二合
+const ni_go_pair =  ["寅午", "寅戌", "午寅", "午戌", "戌寅", "戌午",
+                     "巳酉", "巳丑", "酉巳", "酉丑", "丑巳", "丑酉",
+                     "申子", "申辰", "子申", "子辰", "辰申", "辰子",
+                     "亥卯", "亥未", "卯亥", "卯未", "未亥", "未卯"]
+const sango_goka = ["火", "金", "水", "木"]
+
+function make_san_go(meishiki){
+    let gochukei_list = [];
+
+    for(let i = 0; i <= 1; i++){
+        let group = meishiki[0 + i][1] + meishiki[1 + i][1] + meishiki[2 + i][1];
+        if(san_go_pair.includes(group)){
+            if(i == 1){
+                other_pair = meishiki[0][1] + meishiki[1][1];
+                if(ni_go_pair.includes(other_pair)){
+                    gochukei_list.push(["二合", other_pair + "(" + sango_goka[Math.floor(ni_go_pair.indexOf(other_pair) / 6)] + ")"]);
+                }    
+            }
+            gochukei_list.push(["三合", group + "(" + sango_goka[Math.floor(san_go_pair.indexOf(group) / 6)] + ")"]);
+            if(i == 0){
+                other_pair = meishiki[2][1] + meishiki[3][1];
+                if(ni_go_pair.includes(other_pair)){
+                    gochukei_list.push(["二合", other_pair + "(" + sango_goka[Math.floor(ni_go_pair.indexOf(other_pair) / 6)] + ")"]);
+                }    
+            }
+        }
+    }
+
+    if(gochukei_list.length <= 0){
+        for(let i = 0; i < 3; i++){
+            tmp = make_pair_nigo(meishiki[i][1], meishiki[i+1][1]);
+            if(tmp.length >= 1){
+                gochukei_list = gochukei_list.concat(tmp);
+            }
+        }
+    }
+
+    return gochukei_list;
+}
+
+function make_pair_nigo(str1, str2){
+    let gochukei_list = [];
+    let pair_ji = str1 + str2;
+
+    if(ni_go_pair.includes(pair_ji)){
+        gochukei_list.push(["二合", pair_ji + "(" + sango_goka[Math.floor(ni_go_pair.indexOf(pair_ji) / 5)] + ")"]);
+    }
+    return gochukei_list;
+}
+
+// 三刑
+const san_kei_pair = ["丑未戌", "丑戌未", "未丑戌", "未戌丑", "丑未戌", "丑戌未",
+                     "寅巳申", "寅申巳", "巳寅申", "巳申寅", "申巳寅", "申寅巳"];
+const san_kei_ni_pair =  ["丑未", "丑戌", "未丑", "未戌", "丑未", "丑戌",
+                      "寅巳", "寅申", "巳寅", "巳申", "申巳", "申寅"];
+
+function make_san_kei(meishiki){
+    let gochukei_list = [];
+
+    for(let i = 0; i <= 1; i++){
+        let group = meishiki[0 + i][1] + meishiki[1 + i][1] + meishiki[2 + i][1];
+        if(san_kei_pair.includes(group)){
+            if(i == 1){
+                other_pair = meishiki[0][1] + meishiki[1][1];
+                if(san_kei_ni_pair.includes(other_pair)){
+                    gochukei_list.push(["刑", other_pair]);
+                }    
+            }
+            gochukei_list.push(["刑", group]);
+            if(i == 0){
+                other_pair = meishiki[2][1] + meishiki[3][1];
+                if(san_kei_ni_pair.includes(other_pair)){
+                    gochukei_list.push(["刑", other_pair]);
+                }    
+            }
+        }
+    }
+
+    if(gochukei_list.length <= 0){
+        for(let i = 0; i < 3; i++){
+            tmp = make_pair_sankei_ni(meishiki[i][1], meishiki[i+1][1]);
+            if(tmp.length >= 1){
+                gochukei_list = gochukei_list.concat(tmp);
+            }
+        }
+    }
+
+    return gochukei_list;
+}
+
+function make_pair_sankei_ni(str1, str2){
+    let gochukei_list = [];
+    let pair_ji = str1 + str2;
+
+    if(san_kei_ni_pair.includes(pair_ji)){
+        gochukei_list.push(["刑", pair_ji]);
+    }
+    return gochukei_list;
 }

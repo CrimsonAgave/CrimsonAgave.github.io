@@ -464,11 +464,20 @@ footer {
     vertical-align: bottom;
 }
 
+.gogyo {
+    margin-top: 10px;
+}
+
 
 .gogyo td{
     padding-left:3vh;
     padding-right:3vh;
     font-size: 13px;
+}
+
+.go_chu_kei{
+    font-size: 13px;
+    padding: 10px;
 }
 
 .others {
