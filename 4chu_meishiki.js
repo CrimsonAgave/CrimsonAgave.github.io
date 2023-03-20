@@ -847,7 +847,7 @@ function make_pair_nigo(str1, str2){
     let pair_ji = str1 + str2;
 
     if(ni_go_pair.includes(pair_ji)){
-        gochukei_list.push(["二合", pair_ji + "(" + sango_goka[Math.floor(ni_go_pair.indexOf(pair_ji) / 5)] + ")"]);
+        gochukei_list.push(["二合", pair_ji + "(" + sango_goka[Math.floor(ni_go_pair.indexOf(pair_ji) / 6)] + ")"]);
     }
     return gochukei_list;
 }
