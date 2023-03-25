@@ -2,4 +2,4 @@
 
 四柱推命という占いのウェブサイトです。
 
-[[サイト|CrimsonAgave.github.io/4chu]]
+[サイトを閲覧](https://crimsonagave.github.io/4chu.html)
