@@ -36,25 +36,29 @@ const GOGYO_COLOR = ["#A4D2Bf", "#D79CA7", "#D6D29E", "#B8B8B8", "#909090"]
 
 
 document.addEventListener('DOMContentLoaded', function() {
-    readCookie();
+    readPage();
 });
 
 
-function readCookie(){
-    let cookie_data = document.cookie.split('_');
-    if(cookie_data[0] != 0 && cookie_data[0] != 1){
-        alert("エラーが発生しました。元のページに戻ります。\n Javascript と Cookieが有効か確認してください");
-        location.href = "4chu.html";
-    }
+function readPage(){
+    const url = new URL(window.location.href);
+    const parameters = url.searchParams;
+    let sex = -1;
+    let male = parameters.get("male");
+    let female = parameters.get("female");
+    if(female == "on"){ sex = "0";}
+    if(male == "on"){ sex = "1"; }
+    let username = parameters.get("username");
+    let year = parameters.get("year");
+    let month = parameters.get("month");
+    let day = parameters.get("day");
+    let time = parameters.get("time");
+    let minute = parameters.get("minute");
+    let birthplace = parameters.get("todohuken")
+
+    alert(parameters);
     
-    sex = cookie_data[0];
-    username = cookie_data[1];
-    year = cookie_data[2];
-    month = cookie_data[3];
-    day = cookie_data[4];
-    time = cookie_data[5];
-    minute = cookie_data[6];
-    birthplace = cookie_data[7];
+
 
     let now_date = new Date();
     let birth_date = new Date(now_date.getFullYear(), month, day)
@@ -93,7 +97,7 @@ function readCookie(){
 
     element_birthtime.innerHTML = birth_text;
 
-    meishiki = kanshi(year, month, day, time, minute, birthplace, have_jikanshi);
+    meishiki = kanshi(sex, year, month, day, time, minute, birthplace, have_jikanshi);
 }
 
 
@@ -109,7 +113,7 @@ function convertCSVtoArray(csv){
     return result;
 }
 
-function kanshi(year, month, day, time, minute, prefecture, have_jikanshi){
+function kanshi(sex, year, month, day, time, minute, prefecture, have_jikanshi){
     let result = -1;
     let date = new Date(year, month, day, time, minute);
     if(time == -1 || minute == -1){
@@ -188,7 +192,7 @@ function make_nenkanshi(birth_date, data_setsuiri){
         }
     }
     if(check_error){
-        alert("エラー：年干支計算\nブラウザの設定でCookieが有効か確認してください。");
+        alert("エラー：年干支計算");
         location.href = "4chu.html";
     }
 
@@ -222,7 +226,7 @@ function make_getsukanshi(birth_date, data_setsuiri, nenkanshi_idx){
         }
     }
     if(check_error){
-        alert("エラー：月干支計算\nブラウザの設定でCookieが有効か確認してください。");
+        alert("エラー：月干支計算");
         location.href = "4chu.html";
     }
 
