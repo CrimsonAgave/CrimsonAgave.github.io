@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function readCookie(){
     let cookie_data = document.cookie.split('_');
     if(cookie_data[0] != 0 && cookie_data[0] != 1){
-        alert("エラーが発生しました。元のページに戻ります。");
+        alert("エラーが発生しました。元のページに戻ります。\n Javascript と Cookieが有効か確認してください");
         location.href = "4chu.html";
     }
     
@@ -188,7 +188,8 @@ function make_nenkanshi(birth_date, data_setsuiri){
         }
     }
     if(check_error){
-        alert("エラー：年干支計算");
+        alert("エラー：年干支計算\nブラウザの設定でCookieが有効か確認してください。");
+        location.href = "4chu.html";
     }
 
     let nenkanshi_idx = ROKUJU_KANSHI.slice(kanshi_idx)[0];
@@ -221,7 +222,8 @@ function make_getsukanshi(birth_date, data_setsuiri, nenkanshi_idx){
         }
     }
     if(check_error){
-        alert("エラー：月干支計算");
+        alert("エラー：月干支計算\nブラウザの設定でCookieが有効か確認してください。");
+        location.href = "4chu.html";
     }
 
     let getsukanshi_idx = GETSU_KANSHI[kan_idx][shi_idx];
