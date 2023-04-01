@@ -1,6 +1,6 @@
 
 
-function maleClick(){
+funtion maleClick(){
     if(female.checked){
         female.checked = false;
     }

@@ -56,7 +56,6 @@ function readPage(){
     let minute = parameters.get("minute");
     let birthplace = parameters.get("todohuken")
 
-    alert(parameters);
     
 
 
