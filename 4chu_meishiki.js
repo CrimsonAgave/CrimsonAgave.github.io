@@ -52,7 +52,7 @@ function readPage(){
     let year = parameters.get("year");
     let month = parameters.get("month");
     let day = parameters.get("day");
-    let time = parameters.get("time");
+    let time = parameters.get("hour");
     let minute = parameters.get("minute");
     let birthplace = parameters.get("todohuken")
 
