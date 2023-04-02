@@ -169,7 +169,7 @@ function kanshi(sex, year, month, day, time, minute, prefecture, have_jikanshi){
         display_meishiki(meishiki);
         make_tsuhensei(meishiki);
         make_daiun(meishiki, sex, birth_date, data)
-        make_ryuun(birth_date);
+        make_ryuun(birth_date, result);
         count_gogyo(meishiki);
         make_zokan(meishiki);
         make_gochukei(meishiki);
@@ -544,7 +544,7 @@ function make_daiun(meishiki, sex, birth_date, setsuiri_data){
 }
 
 
-function make_ryuun(birth_date){
+function make_ryuun(birth_date, is_setsuiri){
     // 年運計算
     const len = 124;
     const kijun_date = 2023;
@@ -640,6 +640,8 @@ function make_ryuun(birth_date){
     let getsuun_table = document.createElement("table");
     getsuun_body.appendChild(getsuun_table);
 
+    // 今日が節入りしているかどうか判定
+
     let getsuun_row = [];
     let getsuun_getsu_hyoji = []
     let getsuun_kan = [];
@@ -656,7 +658,7 @@ function make_ryuun(birth_date){
                 getsuun_getsu_hyoji[i].style.fontSize = "60%";
                 getsuun_getsu_hyoji[i].style.fontFamily  = "Century";
                 
-                if((Math.floor(i / 12) == 1) && (today.getMonth() + 1 == getsuun_getsu[i])){
+                if((Math.floor(i / 12) == 1) && (today.getMonth() == getsuun_getsu[i] + is_setsuiri)){
                     getsuun_getsu_hyoji[i].style.backgroundColor = "#fac883";
                     getsuun_getsu_hyoji[i].style.color = "#212324";
                 }
