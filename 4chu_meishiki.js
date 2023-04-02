@@ -39,7 +39,6 @@ document.addEventListener('DOMContentLoaded', function() {
     readPage();
 });
 
-
 function readPage(){
     const url = new URL(window.location.href);
     const parameters = url.searchParams;
@@ -96,9 +95,9 @@ function readPage(){
 
     element_birthtime.innerHTML = birth_text;
 
+
     meishiki = kanshi(sex, year, month, day, time, minute, birthplace, have_jikanshi);
 }
-
 
 function convertCSVtoArray(csv){
     let result = [];
@@ -590,6 +589,7 @@ function make_ryuun(birth_date){
                 if(toshi[i] + birth_date.getFullYear() == today.getFullYear()){
                     nenun_nen_hyoji[i].style.backgroundColor = "#fac883";
                     nenun_nen_hyoji[i].style.color = "#212324";
+                    let elem = nenun_nen_hyoji[i];
                 }
             }else if(j == 1){
                 nenun_kan.push(document.createElement("td"));
@@ -620,7 +620,7 @@ function make_ryuun(birth_date){
             }        
         }
     }
-
+    
     // 月運計算
     const getsu_len = 36;
     const kijun_year = 2023;

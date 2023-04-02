@@ -1,6 +1,6 @@
 
 
-funtion maleClick(){
+function maleClick(){
     if(female.checked){
         female.checked = false;
     }
@@ -25,6 +25,7 @@ function make_meishiki(){
         let user_birthday = year.value + "/" + month.value + "/" + day.value;
         let date = new Date(user_birthday);
     
+        
         if(isNaN(date.getDate()) || !(1 <= month.value && month.value <= 12) || !(1 <= day.value && day.value <= 31)){
             alert("適切な生年月日を入力してください");
         }else if(!(1851 <= Number(year.value) && Number(year.value) <= 2050)){
