@@ -32,6 +32,7 @@ for(i = 0; i < 5; i++){
 for(let i = 0; i < 5; i++){
     JI_KANSHI[i].push(JI_KANSHI[i][0]);
 }
+
 const GOGYO_COLOR = ["#A4D2Bf", "#D79CA7", "#D6D29E", "#B8B8B8", "#909090"] 
 
 
@@ -182,7 +183,7 @@ function make_nenkanshi(birth_date, data_setsuiri){
     let check_error = true;
     for(i = 0; i < data_setsuiri.length; i++){
         if((Number(data_setsuiri[i][0]) == birth_date.getFullYear()) && (Number(data_setsuiri[i][1]) == 2)){
-            let ritshun_date = new Date(data_setsuiri[i][0], data_setsuiri[i][1], data_setsuiri[i][2], data_setsuiri[i][3], data_setsuiri[i][4]);
+            let ritshun_date = new Date(data_setsuiri[i][0], data_setsuiri[i][1] - 1, data_setsuiri[i][2], data_setsuiri[i][3], data_setsuiri[i][4]);
             if(ritshun_date <= birth_date){
                 kanshi_idx += 1;
             }
