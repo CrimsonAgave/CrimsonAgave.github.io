@@ -169,8 +169,8 @@ function kanshi(sex, year, month, day, time, minute, prefecture, have_jikanshi){
         meishiki = [[jikan, jishi], [nikkan, nitshi], [gekkan, getshi], [nenkan, nenshi]];
         display_meishiki(meishiki);
         make_tsuhensei(meishiki);
-        make_daiun(meishiki, sex, birth_date, data)
-        make_ryuun(birth_date, result);
+        make_daiun(meishiki, sex, birth_date, data);
+        make_ryuun(birth_date, data);
         count_gogyo(meishiki);
         make_zokan(meishiki);
         make_gochukei(meishiki);
@@ -545,7 +545,7 @@ function make_daiun(meishiki, sex, birth_date, setsuiri_data){
 }
 
 
-function make_ryuun(birth_date, is_setsuiri){
+function make_ryuun(birth_date, data_setsuiri){
     // 年運計算
     const len = 124;
     const kijun_date = 2023;
@@ -642,6 +642,18 @@ function make_ryuun(birth_date, is_setsuiri){
     getsuun_body.appendChild(getsuun_table);
 
     // 今日が節入りしているかどうか判定
+    date = new Date();
+    for (let i = 0; i < data_setsuiri.length; i++) {  
+        let setsuiri_date = new Date(data_setsuiri[i][0], data_setsuiri[i][1], data_setsuiri[i][2], data_setsuiri[i][3], data_setsuiri[i][4], data_setsuiri[i][5]);
+        if((date.getFullYear() == setsuiri_date.getFullYear()) && (date.getMonth() == setsuiri_date.getMonth())){
+            if(date > setsuiri_date){
+                is_setsuiri =  0;
+            }else{
+                is_setsuiri =  1;
+            }
+        }
+    }
+
 
     let getsuun_row = [];
     let getsuun_getsu_hyoji = []
@@ -659,7 +671,7 @@ function make_ryuun(birth_date, is_setsuiri){
                 getsuun_getsu_hyoji[i].style.fontSize = "60%";
                 getsuun_getsu_hyoji[i].style.fontFamily  = "Century";
                 
-                if((Math.floor(i / 12) == 1) && (today.getMonth() == getsuun_getsu[i] + is_setsuiri)){
+                if((Math.floor(i / 12) == 1) && (today.getMonth() + 1 == getsuun_getsu[i] + is_setsuiri)){
                     getsuun_getsu_hyoji[i].style.backgroundColor = "#fac883";
                     getsuun_getsu_hyoji[i].style.color = "#212324";
                 }
