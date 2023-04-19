@@ -671,7 +671,7 @@ function make_ryuun(birth_date, data_setsuiri){
                 getsuun_getsu_hyoji[i].style.fontSize = "60%";
                 getsuun_getsu_hyoji[i].style.fontFamily  = "Century";
                 
-                if((Math.floor(i / 12) == 1) && (today.getMonth() + 1 == getsuun_getsu[i] + is_setsuiri)){
+                if((Math.floor(i / 12) == 1) && (today.getMonth() == getsuun_getsu[i] + is_setsuiri)){
                     getsuun_getsu_hyoji[i].style.backgroundColor = "#fac883";
                     getsuun_getsu_hyoji[i].style.color = "#212324";
                 }
