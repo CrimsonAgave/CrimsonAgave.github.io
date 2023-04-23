@@ -60,7 +60,7 @@ function readPage(){
 
 
     let now_date = new Date();
-    let birth_date = new Date(now_date.getFullYear(), month, day)
+    let birth_date = new Date(now_date.getFullYear(), month-1, day)
 
     let user_title = "";
     let element_name = document.getElementById("username");
