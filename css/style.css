@@ -24,7 +24,7 @@ body {
     position:absolute;
     left: 10%;
     font-family: '游明朝','Yu Mincho',YuMincho,'Hiragino Mincho Pro',serif;
-    color: #212324;
+    color: #242223;
     -webkit-text-stroke: 0.2px #FFF;
     margin-top: 12px;
 }
@@ -64,13 +64,13 @@ body {
     left: 50%;
     margin-left: -200px;
     font-family: '游明朝','Yu Mincho',YuMincho,'Hiragino Mincho Pro',serif;
-    color: #212324;
+    color: #242223;
     -webkit-text-stroke: 0.5px #FFF;
     margin-top: 30px;
 }
 
 .title p{
-    color: #212324;
+    color: #242223;
     margin:0;
 }
 
@@ -224,7 +224,7 @@ input {
     margin-top: 0;
     padding-top: 0;
     overflow-x: auto;
-    background-color: #212324;
+    background-color: #242223;
     padding-bottom: 20px;
     direction: rtl;
 }
@@ -238,7 +238,7 @@ input {
 
 .daiun_body td{
     border-color: #fac883;
-    color: #212324;
+    color: #242223;
     padding-left: 7px;
     padding-right: 7px;
     padding-top: 0;
@@ -256,7 +256,7 @@ input {
     margin-top: 0;
     padding-top: 0;
     overflow-x: auto;
-    background-color: #212324;
+    background-color: #242223;
     direction: rtl;    
 }
 
@@ -269,7 +269,7 @@ input {
 
 .nenun_body td{
     border-color: #fac883;
-    color: #212324;
+    color: #242223;
     padding-left: 3px;
     padding-right: 3px;
     padding-top: 0;
@@ -289,7 +289,7 @@ input {
     margin-top: 0;
     padding-top: 0;
     overflow-x: auto;
-    background-color: #212324;
+    background-color: #242223;
     direction: rtl;    
 }
 
@@ -304,7 +304,7 @@ input {
 .getsuun_body td{
     text-align: center;
     border-color: #fac883;
-    color: #212324;
+    color: #242223;
     padding-left: 3px;
     padding-right: 3px;
     padding-top: 0;
@@ -316,7 +316,7 @@ footer a{
 }
 
 footer {
-    background-color: #212324;
+    background-color: #242223;
     color: azure;
     text-align: center;
     font-size: 50%;
@@ -483,7 +483,7 @@ footer {
 .others {
     text-align: center;
     color: #fac883;
-    background-color: #212324;
+    background-color: #242223;
     margin-top: 0;
     padding: 10px;
 }
@@ -496,7 +496,7 @@ footer {
 background-color: #fac883;
 }
 ::-webkit-scrollbar-thumb {
-background: #212324;
+background: #242223;
 }
 
 .others a{
