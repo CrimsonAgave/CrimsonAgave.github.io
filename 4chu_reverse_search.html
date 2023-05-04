@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <script src="4chu_reverse_search.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-store">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>四柱推命 逆引き</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="title_image">
+        <div class="title">
+            <a href="4chu.html">四<BR>柱<BR>推<BR>命</a>
+        </div>
+    </div>    
+    <div class="board">
+        <form action="4chu_reverse_result.html" method="GET">
+            <div class="meishiki_reverse">
+                <div class="meishiki_element">
+                    <p>命式</p>
+                    <table>
+                        <tr>
+                            <td></td>
+                            <td>時柱</td>
+                            <td>日柱</td>
+                            <td>月柱</td>
+                            <td>年柱</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                十神　
+                            </td>
+                            <td>
+                                <select name="jikan_jitshin" id="jikan_jitshin">
+                                    <option value="不明">不明</option>
+                                    <option value="比肩">比肩</option>
+                                    <option value="劫財">劫財</option>
+                                    <option value="食神">食神</option>
+                                    <option value="傷官">傷官</option>
+                                    <option value="偏財">偏財</option>
+                                    <option value="正財">正財</option>
+                                    <option value="偏官">偏官</option>
+                                    <option value="正官">正官</option>
+                                    <option value="偏印">偏印</option>
+                                    <option value="正印">正印</option>
+                                </select>
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+                                <select name="gekkan_jitshin" id="gekkan_jitshin">
+                                    <option value="不明">不明</option>
+                                    <option value="比肩">比肩</option>
+                                    <option value="劫財">劫財</option>
+                                    <option value="食神">食神</option>
+                                    <option value="傷官">傷官</option>
+                                    <option value="偏財">偏財</option>
+                                    <option value="正財">正財</option>
+                                    <option value="偏官">偏官</option>
+                                    <option value="正官">正官</option>
+                                    <option value="偏印">偏印</option>
+                                    <option value="正印">正印</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="nenkan_jitshin" id="nenkan_jitshin">
+                                    <option value="不明">不明</option>
+                                    <option value="比肩">比肩</option>
+                                    <option value="劫財">劫財</option>
+                                    <option value="食神">食神</option>
+                                    <option value="傷官">傷官</option>
+                                    <option value="偏財">偏財</option>
+                                    <option value="正財">正財</option>
+                                    <option value="偏官">偏官</option>
+                                    <option value="正官">正官</option>
+                                    <option value="偏印">偏印</option>
+                                    <option value="正印">正印</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                天干　
+                            </td>
+                            <td>
+                                <select name="jikan" id="jikan">
+                                    <option value="不明">不明</option>
+                                    <option value="甲">甲</option>
+                                    <option value="乙">乙</option>
+                                    <option value="丙">丙</option>
+                                    <option value="丁">丁</option>
+                                    <option value="戊">戊</option>
+                                    <option value="己">己</option>
+                                    <option value="庚">庚</option>
+                                    <option value="辛">辛</option>
+                                    <option value="壬">壬</option>
+                                    <option value="癸">癸</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="nikkan" id="nikkan">
+                                    <option value="不明">不明</option>
+                                    <option value="甲">甲</option>
+                                    <option value="乙">乙</option>
+                                    <option value="丙">丙</option>
+                                    <option value="丁">丁</option>
+                                    <option value="戊">戊</option>
+                                    <option value="己">己</option>
+                                    <option value="庚">庚</option>
+                                    <option value="辛">辛</option>
+                                    <option value="壬">壬</option>
+                                    <option value="癸">癸</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="gekkan" id="gekkan">
+                                    <option value="不明">不明</option>
+                                    <option value="甲">甲</option>
+                                    <option value="乙">乙</option>
+                                    <option value="丙">丙</option>
+                                    <option value="丁">丁</option>
+                                    <option value="戊">戊</option>
+                                    <option value="己">己</option>
+                                    <option value="庚">庚</option>
+                                    <option value="辛">辛</option>
+                                    <option value="壬">壬</option>
+                                    <option value="癸">癸</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="nenkan" id="nenkan">
+                                    <option value="不明">不明</option>
+                                    <option value="甲">甲</option>
+                                    <option value="乙">乙</option>
+                                    <option value="丙">丙</option>
+                                    <option value="丁">丁</option>
+                                    <option value="戊">戊</option>
+                                    <option value="己">己</option>
+                                    <option value="庚">庚</option>
+                                    <option value="辛">辛</option>
+                                    <option value="壬">壬</option>
+                                    <option value="癸">癸</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                地支　
+                            </td>
+                            <td>
+                                <select name="jishi" id="jishi">
+                                    <option value="不明">不明</option>
+                                    <option value="子">子</option>
+                                    <option value="丑">丑</option>
+                                    <option value="寅">寅</option>
+                                    <option value="卯">卯</option>
+                                    <option value="辰">辰</option>
+                                    <option value="巳">巳</option>
+                                    <option value="午">午</option>
+                                    <option value="未">未</option>
+                                    <option value="申">申</option>
+                                    <option value="酉">酉</option>
+                                    <option value="戌">戌</option>
+                                    <option value="亥">亥</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="nitshi" id="nitshi">
+                                    <option value="不明">不明</option>
+                                    <option value="子">子</option>
+                                    <option value="丑">丑</option>
+                                    <option value="寅">寅</option>
+                                    <option value="卯">卯</option>
+                                    <option value="辰">辰</option>
+                                    <option value="巳">巳</option>
+                                    <option value="午">午</option>
+                                    <option value="未">未</option>
+                                    <option value="申">申</option>
+                                    <option value="酉">酉</option>
+                                    <option value="戌">戌</option>
+                                    <option value="亥">亥</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="getshi" id="getshi">
+                                    <option value="不明">不明</option>
+                                    <option value="子">子</option>
+                                    <option value="丑">丑</option>
+                                    <option value="寅">寅</option>
+                                    <option value="卯">卯</option>
+                                    <option value="辰">辰</option>
+                                    <option value="巳">巳</option>
+                                    <option value="午">午</option>
+                                    <option value="未">未</option>
+                                    <option value="申">申</option>
+                                    <option value="酉">酉</option>
+                                    <option value="戌">戌</option>
+                                    <option value="亥">亥</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="nenshi" id="nenshi">
+                                    <option value="不明">不明</option>
+                                    <option value="子">子</option>
+                                    <option value="丑">丑</option>
+                                    <option value="寅">寅</option>
+                                    <option value="卯">卯</option>
+                                    <option value="辰">辰</option>
+                                    <option value="巳">巳</option>
+                                    <option value="午">午</option>
+                                    <option value="未">未</option>
+                                    <option value="申">申</option>
+                                    <option value="酉">酉</option>
+                                    <option value="戌">戌</option>
+                                    <option value="亥">亥</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                十神　
+                            </td>
+                            <td>
+                                <select name="jishi_jitshin" id="jishi_jitshin">
+                                    <option value="不明">不明</option>
+                                    <option value="比肩">比肩</option>
+                                    <option value="劫財">劫財</option>
+                                    <option value="食神">食神</option>
+                                    <option value="傷官">傷官</option>
+                                    <option value="偏財">偏財</option>
+                                    <option value="正財">正財</option>
+                                    <option value="偏官">偏官</option>
+                                    <option value="正官">正官</option>
+                                    <option value="偏印">偏印</option>
+                                    <option value="正印">正印</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="nitshi_jitshin" id="nitshi_jitshin">
+                                    <option value="不明">不明</option>
+                                    <option value="比肩">比肩</option>
+                                    <option value="劫財">劫財</option>
+                                    <option value="食神">食神</option>
+                                    <option value="傷官">傷官</option>
+                                    <option value="偏財">偏財</option>
+                                    <option value="正財">正財</option>
+                                    <option value="偏官">偏官</option>
+                                    <option value="正官">正官</option>
+                                    <option value="偏印">偏印</option>
+                                    <option value="正印">正印</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="getshi_jitshin" id="getshi_jitshin">
+                                    <option value="不明">不明</option>
+                                    <option value="比肩">比肩</option>
+                                    <option value="劫財">劫財</option>
+                                    <option value="食神">食神</option>
+                                    <option value="傷官">傷官</option>
+                                    <option value="偏財">偏財</option>
+                                    <option value="正財">正財</option>
+                                    <option value="偏官">偏官</option>
+                                    <option value="正官">正官</option>
+                                    <option value="偏印">偏印</option>
+                                    <option value="正印">正印</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="nenshi_jitshin" id="nenshi_jitshin">
+                                    <option value="不明">不明</option>
+                                    <option value="比肩">比肩</option>
+                                    <option value="劫財">劫財</option>
+                                    <option value="食神">食神</option>
+                                    <option value="傷官">傷官</option>
+                                    <option value="偏財">偏財</option>
+                                    <option value="正財">正財</option>
+                                    <option value="偏官">偏官</option>
+                                    <option value="正官">正官</option>
+                                    <option value="偏印">偏印</option>
+                                    <option value="正印">正印</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="gogyo_umu">
+                    <p>五行の有無</p>
+                    <table>
+                        <tr>
+                            <td>木</td>
+                            <td>火</td>
+                            <td>土</td>
+                            <td>金</td>
+                            <td>水</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select name="moku" id="moku">
+                                    <option value="不明">不明</option>
+                                    <option value="有">有</option>
+                                    <option value="無">無</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="ka" id="ka">
+                                    <option value="不明">不明</option>
+                                    <option value="有">有</option>
+                                    <option value="無">無</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="do" id="do">
+                                    <option value="不明">不明</option>
+                                    <option value="有">有</option>
+                                    <option value="無">無</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="kin" id="kin">
+                                    <option value="不明">不明</option>
+                                    <option value="有">有</option>
+                                    <option value="無">無</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="sui" id="sui">
+                                    <option value="不明">不明</option>
+                                    <option value="有">有</option>
+                                    <option value="無">無</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="gogyo_umu">
+                    <p>十神の有無</p>
+                    <table class="jikkan_umu">
+                        <tr>
+                            <td>比肩</td>
+                            <td>食神</td>
+                            <td>偏財</td>
+                            <td>偏官</td>
+                            <td>偏印</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select name="hiken_umu" id="hiken_umu">
+                                    <option value="不明">不明</option>
+                                    <option value="有">有</option>
+                                    <option value="無">無</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="shokushin_umu" id="shokushin_umu">
+                                    <option value="不明">不明</option>
+                                    <option value="有">有</option>
+                                    <option value="無">無</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="henzai_umu" id="henzai_umu">
+                                    <option value="不明">不明</option>
+                                    <option value="有">有</option>
+                                    <option value="無">無</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="henkan_umu" id="henkan_umu">
+                                    <option value="不明">不明</option>
+                                    <option value="有">有</option>
+                                    <option value="無">無</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="hennin_umu" id="hennin_umu">
+                                    <option value="不明">不明</option>
+                                    <option value="有">有</option>
+                                    <option value="無">無</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>劫財</td>
+                            <td>傷官</td>
+                            <td>正財</td>
+                            <td>正官</td>
+                            <td>正印</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select name="gozai_umu" id="gozai_umu">
+                                    <option value="不明">不明</option>
+                                    <option value="有">有</option>
+                                    <option value="無">無</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="shokan_umu" id="shokan_umu">
+                                    <option value="不明">不明</option>
+                                    <option value="有">有</option>
+                                    <option value="無">無</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="sezai_umu" id="sezai_umu">
+                                    <option value="不明">不明</option>
+                                    <option value="有">有</option>
+                                    <option value="無">無</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="sekan_umu" id="sekan_umu">
+                                    <option value="不明">不明</option>
+                                    <option value="有">有</option>
+                                    <option value="無">無</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="sein_umu" id="sein_umu">
+                                    <option value="不明">不明</option>
+                                    <option value="有">有</option>
+                                    <option value="無">無</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="gogyo_umu">
+                    <p>字の有無</p>
+                    <table class="jikkan_umu">
+                        <tr>
+                            <td>甲</td>
+                            <td>乙</td>
+                            <td>丙</td>
+                            <td>丁</td>
+                            <td>戊</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select name="jikkan_one" id="jikkan_one">
+                                    <option value="不明">不明</option>
+                                    <option value="有">有</option>
+                                    <option value="無">無</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="jikkan_two" id="jikkan_two">
+                                    <option value="不明">不明</option>
+                                    <option value="有">有</option>
+                                    <option value="無">無</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="jikkan_three" id="jikkan_three">
+                                    <option value="不明">不明</option>
+                                    <option value="有">有</option>
+                                    <option value="無">無</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="jikkan_four" id="jikkan_four">
+                                    <option value="不明">不明</option>
+                                    <option value="有">有</option>
+                                    <option value="無">無</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="jikkan_five" id="jikkan_five">
+                                    <option value="不明">不明</option>
+                                    <option value="有">有</option>
+                                    <option value="無">無</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>己</td>
+                            <td>庚</td>
+                            <td>辛</td>
+                            <td>壬</td>
+                            <td>癸</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select name="jikkan_six" id="jikkan_six">
+                                    <option value="不明">不明</option>
+                                    <option value="有">有</option>
+                                    <option value="無">無</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="jikkan_seven" id="jikkan_seven">
+                                    <option value="不明">不明</option>
+                                    <option value="有">有</option>
+                                    <option value="無">無</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="jikkan_eight" id="jikkan_eight">
+                                    <option value="不明">不明</option>
+                                    <option value="有">有</option>
+                                    <option value="無">無</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="jikkan_nine" id="jikkan_nine">
+                                    <option value="不明">不明</option>
+                                    <option value="有">有</option>
+                                    <option value="無">無</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="jikkan_ten" id="jikkan_ten">
+                                    <option value="不明">不明</option>
+                                    <option value="有">有</option>
+                                    <option value="無">無</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+                    <table class="chishi_umu">
+                        <tr>
+                            <td>子</td>
+                            <td>丑</td>
+                            <td>寅</td>
+                            <td>卯</td>
+                            <td>辰</td>
+                            <td>巳</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select name="chishi_one" id="chishi_one">
+                                    <option value="不明">不明</option>
+                                    <option value="有">有</option>
+                                    <option value="無">無</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="chishi_two" id="chishi_two">
+                                    <option value="不明">不明</option>
+                                    <option value="有">有</option>
+                                    <option value="無">無</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="chishi_three" id="chishi_three">
+                                    <option value="不明">不明</option>
+                                    <option value="有">有</option>
+                                    <option value="無">無</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="chishi_four" id="chishi_four">
+                                    <option value="不明">不明</option>
+                                    <option value="有">有</option>
+                                    <option value="無">無</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="chishi_five" id="chishi_five">
+                                    <option value="不明">不明</option>
+                                    <option value="有">有</option>
+                                    <option value="無">無</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="chishi_six" id="chishi_six">
+                                    <option value="不明">不明</option>
+                                    <option value="有">有</option>
+                                    <option value="無">無</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>午</td>
+                            <td>未</td>
+                            <td>申</td>
+                            <td>酉</td>
+                            <td>戌</td>
+                            <td>亥</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select name="chishi_seven" id="chishi_seven">
+                                    <option value="不明">不明</option>
+                                    <option value="有">有</option>
+                                    <option value="無">無</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="chishi_eight" id="chishi_eight">
+                                    <option value="不明">不明</option>
+                                    <option value="有">有</option>
+                                    <option value="無">無</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="chishi_nine" id="chishi_nine">
+                                    <option value="不明">不明</option>
+                                    <option value="有">有</option>
+                                    <option value="無">無</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="chishi_ten" id="chishi_ten">
+                                    <option value="不明">不明</option>
+                                    <option value="有">有</option>
+                                    <option value="無">無</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="chishi_eleven" id="chishi_eleven">
+                                    <option value="不明">不明</option>
+                                    <option value="有">有</option>
+                                    <option value="無">無</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="chishi_twelve" id="chishi_twelve">
+                                    <option value="不明">不明</option>
+                                    <option value="有">有</option>
+                                    <option value="無">無</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                    <table>
+                        <p>検索範囲</p>
+                        <tr>
+                            <td align="left">
+                                <input type="number" name="min_year" id="min_year" min="1851" max="2049" value="1930">
+                                年　-　
+                                <input type="number" name="max_year" id="max_year" min="1851" max="2049" value="2030">
+                                年
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+
+            <div class="meishiki_button_wrapper">
+                <button type="make" class="meishiki_button" onclick="return reverse_research();"> 逆引き</button>
+            </div>
+        </form>
+    </div>
+</body>
+<div class="others">
+    <p><a href="4chu.html">四柱推命</a>
+    <p><a href="4chu_reverse_search.html">四柱推命 逆引き</a>
+    <p><a href="eki.html">易占</a>
+</div>
+<footer>
+    <p><a href="https://www.freepik.com/author/visnezh">Image by visnezh on Freepik</a>
+    <p> © プレーンバニラ 2023 </p>
+</footer>
+</html>
+

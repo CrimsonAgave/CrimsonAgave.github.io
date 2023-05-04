@@ -7,6 +7,11 @@ body {
     overflow-x: hidden;
 }
 
+p {
+    color: #fac883;
+    text-align: center;
+}
+
 .form{
     margin: 0;
     padding: 0;
@@ -103,7 +108,7 @@ body {
     text-align: center;
     color: #fac883;
     margin: 0;
-    padding-bottom: 120px;
+    padding-bottom: 60px;
 }
 
 .select {
@@ -215,7 +220,7 @@ input {
 }
 
 .daiun_board{
-    padding-top: 120px;
+    padding-top: 60px;
     text-align: center;
     color: #fac883;
 }
@@ -478,6 +483,48 @@ footer {
 .go_chu_kei{
     font-size: 13px;
     padding: 10px;
+}
+
+.meishiki_reverse{
+    padding: 10px;
+    text-align: center;
+    color: #fac883;
+}
+
+.meishiki_reverse p{
+    margin: 10px;
+    padding-top: 20px;
+    font-size: 120%;
+}
+
+.meishiki_reverse table{
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse:collapse;
+    border-spacing: 0;
+}
+
+.birthdate{
+    text-align: center;
+    color: #fac883;
+    line-height: 200%;
+}
+
+.reverse_result{
+    height: 90vh;
+}
+
+.reverse_result p{
+    padding-top: 70px;
+    padding-bottom: 0px;
+    margin: 0;
+    font-size: 120%;
+}
+
+.range{
+    text-align: center;
+    color: #fac883;
+    padding-bottom: 20px;
 }
 
 .others {

@@ -520,7 +520,7 @@ function make_daiun(meishiki, sex, birth_date, setsuiri_data){
                 try {
                     if(daiun_nen[i] <= nenrei && nenrei < daiun_nen[i + 1] ){
                         daiun_nen_hyoji[i].style.backgroundColor = "#fac883";
-                        daiun_nen_hyoji[i].style.color = "#212324";
+                        daiun_nen_hyoji[i].style.color = "#242223";
                     }    
                 } catch (error) {
                    console.log(error); 
@@ -589,7 +589,7 @@ function make_ryuun(birth_date, data_setsuiri){
                 nenun_nen_hyoji[i].style.fontFamily  = "Century";
                 if(toshi[i] + birth_date.getFullYear() == today.getFullYear()){
                     nenun_nen_hyoji[i].style.backgroundColor = "#fac883";
-                    nenun_nen_hyoji[i].style.color = "#212324";
+                    nenun_nen_hyoji[i].style.color = "#242223";
                     let elem = nenun_nen_hyoji[i];
                 }
             }else if(j == 1){
@@ -616,7 +616,7 @@ function make_ryuun(birth_date, data_setsuiri){
                 nen_hyoji[i].style.fontFamily = "Century";
                 if(toshi[i] + birth_date.getFullYear() == today.getFullYear()){
                     nen_hyoji[i].style.backgroundColor = "#fac883";
-                    nen_hyoji[i].style.color = "#212324";
+                    nen_hyoji[i].style.color = "#242223";
                 }
             }        
         }
@@ -673,7 +673,7 @@ function make_ryuun(birth_date, data_setsuiri){
                 
                 if((Math.floor(i / 12) == 1) && (today.getMonth() == getsuun_getsu[i] + is_setsuiri)){
                     getsuun_getsu_hyoji[i].style.backgroundColor = "#fac883";
-                    getsuun_getsu_hyoji[i].style.color = "#212324";
+                    getsuun_getsu_hyoji[i].style.color = "#242223";
                 }
             }else if(j == 1){
                 getsuun_kan.push(document.createElement("td"));
