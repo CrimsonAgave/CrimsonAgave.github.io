@@ -190,6 +190,9 @@ function readPage(){
         var max_year = second_year;
     }
 
+    let birthdate_p = document.getElementById("birthdate_p");
+    birthdate_p.innerHTML = "生年月日";
+
     let display_html = document.getElementById("range");
     display_html.innerHTML = min_year + "年 - " + max_year + "年";
 
