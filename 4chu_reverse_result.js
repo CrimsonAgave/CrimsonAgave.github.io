@@ -176,7 +176,7 @@ function readPage(){
     if(chishi_seven == 2){unexist.push("午");}
     if(chishi_eight == 2){unexist.push("未");}
     if(chishi_nine == 2){unexist.push("申");}
-    if(jikkan_ten == 2){unexist.push("酉");}
+    if(chishi_ten == 2){unexist.push("酉");}
     if(chishi_eleven == 2){unexist.push("戌");}
     if(chishi_twelve == 2){unexist.push("亥");}
 
