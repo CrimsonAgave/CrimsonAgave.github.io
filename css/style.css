@@ -127,11 +127,19 @@ p {
     padding-bottom: 60px;
 }
 
-.select {
+.select{
+    padding-top: 200px;
+}
+
+.select table{
+    color:#fac883;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.select td{
     color:#fac883;
     text-align: center;
-    padding-top: 200px;
-    margin: 0;
 }
 
 .inputs{
