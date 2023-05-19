@@ -267,9 +267,6 @@ for(let i = 0; i < 5; i++){
         JI_KANSHI[i].push([(2 * i + j) % 10, j % 12])
     }
 }
-for(let i = 0; i < 5; i++){
-    JI_KANSHI[i].push([(JI_KANSHI[i][0][0] + 2) % 10, JI_KANSHI[i][0][1]])
-}
 
 function make_jichu(meishiki){
     let jichu_list = [];
