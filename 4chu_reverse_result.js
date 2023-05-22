@@ -274,7 +274,7 @@ function make_jichu(meishiki){
     nikkan = meishiki[2]
     kan_idx = KAN.indexOf(nikkan) % 5;
 
-    for(let i = 0; i < 13; i++){
+    for(let i = 0; i < JI_KANSHI[0].length; i++){
         shi_idx = i;
 
         kan = KAN[JI_KANSHI[kan_idx][shi_idx][0]]
