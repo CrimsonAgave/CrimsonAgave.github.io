@@ -631,7 +631,7 @@ function make_ryuun(birth_date, data_setsuiri){
     let getsuun = [];
     let getsuun_getsu = [];
     for(i = 0; i < getsu_len; i++){
-        let j = (ROKUJU_KANSHI_str.indexOf(kanshi) + gap_g + i - 12 + 7) % 60;
+        let j = (ROKUJU_KANSHI_str.indexOf(kanshi) + gap_g + i - 12 + 3) % 60;
         getsuun.push(ROKUJU_KANSHI_str[j]);
         getsuun_getsu.push(i % 12 + 1);
     }
@@ -671,7 +671,7 @@ function make_ryuun(birth_date, data_setsuiri){
                 getsuun_getsu_hyoji[i].style.fontSize = "60%";
                 getsuun_getsu_hyoji[i].style.fontFamily  = "Century";
                 
-                if((Math.floor(i / 12) == 1) && (today.getMonth() == getsuun_getsu[i] + is_setsuiri)){
+                if((Math.floor(i / 12) == 1) && (today.getMonth() + 1 == getsuun_getsu[i] + is_setsuiri)){
                     getsuun_getsu_hyoji[i].style.backgroundColor = "#fac883";
                     getsuun_getsu_hyoji[i].style.color = "#242223";
                 }
