@@ -627,20 +627,6 @@ function make_ryuun(birth_date, data_setsuiri){
     const kijun_year = 2023;
     const kijun_getsu = 1;
 
-    let gap_g = today.getFullYear() * 12 + today.getMonth() - kijun_year * 12 + kijun_getsu;
-    let getsuun = [];
-    let getsuun_getsu = [];
-    for(i = 0; i < getsu_len; i++){
-        let j = (ROKUJU_KANSHI_str.indexOf(kanshi) + gap_g + i - 12 + 3) % 60;
-        getsuun.push(ROKUJU_KANSHI_str[j]);
-        getsuun_getsu.push(i % 12 + 1);
-    }
-
-    // 月運 表示
-    let getsuun_body = document.getElementsByClassName("getsuun_body")[0];
-    let getsuun_table = document.createElement("table");
-    getsuun_body.appendChild(getsuun_table);
-
     // 今日が節入りしているかどうか判定
     date = new Date();
     for (let i = 0; i < data_setsuiri.length; i++) {  
@@ -654,6 +640,19 @@ function make_ryuun(birth_date, data_setsuiri){
         }
     }
 
+    let gap_g = today.getFullYear() * 12 + today.getMonth() - kijun_year * 12 + kijun_getsu;
+    let getsuun = [];
+    let getsuun_getsu = [];
+    for(i = 0; i < getsu_len; i++){
+        let j = (ROKUJU_KANSHI_str.indexOf(kanshi) + gap_g + i - 12 + 2 + is_setsuiri) % 60;
+        getsuun.push(ROKUJU_KANSHI_str[j]);
+        getsuun_getsu.push(i % 12 + 1);
+    }
+
+    // 月運 表示
+    let getsuun_body = document.getElementsByClassName("getsuun_body")[0];
+    let getsuun_table = document.createElement("table");
+    getsuun_body.appendChild(getsuun_table);
 
     let getsuun_row = [];
     let getsuun_getsu_hyoji = []
